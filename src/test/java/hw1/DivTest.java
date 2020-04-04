@@ -1,12 +1,10 @@
 package hw1;
 
-import com.epam.tat.module4.Calculator;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class DivTest {
+public class DivTest extends BaseTestClass {
 
     @DataProvider
     public static Object[] divTwoNumbersDataProvider() {
@@ -32,13 +30,5 @@ public class DivTest {
 
         calculator.div(1, 0);
     }
-
-    @BeforeTest
-    private void clearPreviousTestData() {
-
-        calculator = new Calculator();
-    }
-
-    private Calculator calculator;
 
 }

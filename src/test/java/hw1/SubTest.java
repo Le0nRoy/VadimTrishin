@@ -1,13 +1,10 @@
 package hw1;
 
-import com.epam.tat.module4.Calculator;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-public class SubTest {
+public class SubTest extends BaseTestClass {
 
     @DataProvider
     public static Object[] subTwoNumbersDataProvider() {
@@ -28,13 +25,5 @@ public class SubTest {
         long result = calculator.sub(num1, num2);
         Assert.assertEquals(result, expected);
     }
-
-    @BeforeTest
-    private void clearPreviousTestData() {
-
-        calculator = new Calculator();
-    }
-
-    private Calculator calculator;
 
 }
