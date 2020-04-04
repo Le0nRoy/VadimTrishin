@@ -8,7 +8,6 @@
     <artifactId>HW1UnitFrameworks</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-
     <properties>
         <maven.compiler.source>1.6</maven.compiler.source>
         <maven.compiler.target>1.6</maven.compiler.target>
@@ -21,62 +20,25 @@
     <profiles>
         <profile>
             <id>testMultAndDiv</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.0.0-M4</version>
-                        <configuration>
-                            <suiteXmlFiles>
-                                <suiteXmlFile>src/test/resources/testngMultDiv.xml</suiteXmlFile>
-                            </suiteXmlFiles>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
+            <properties>
+                <build.profile.id>testMultAndDiv</build.profile.id>
+            </properties>
         </profile>
-
         <profile>
             <id>testAll</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.0.0-M4</version>
-                        <configuration>
-                            <suiteXmlFiles>
-                                <suiteXmlFile>src/test/resources/testngMultDiv.xml</suiteXmlFile>
-                                <suiteXmlFile>src/test/resources/testngSumSub.xml</suiteXmlFile>
-                            </suiteXmlFiles>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
+            <properties>
+                <build.profile.id>testAll</build.profile.id>
+            </properties>
         </profile>
-
         <profile>
             <id>testSumAndSub</id>
+            <properties>
+                <build.profile.id>testSumAndSub</build.profile.id>
+            </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.0.0-M4</version>
-                        <configuration>
-                            <suiteXmlFiles>
-                                <suiteXmlFile>src/test/resources/testngSumSub.xml</suiteXmlFile>
-                            </suiteXmlFiles>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
         </profile>
-
     </profiles>
 
     <!--    Dependencies descriptions-->
@@ -94,7 +56,6 @@
             <version>7.1.0</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <!--    Build descriptions-->
@@ -102,29 +63,14 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-help-plugin</artifactId>
-                <version>3.1.0</version>
-                <executions>
-                    <execution>
-                        <id>show-profiles</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>active-profiles</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M4</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>profiles/${build.profile.id}/testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
             </plugin>
-            <!--            <plugin>-->
-            <!--                <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                <artifactId>maven-surefire-plugin</artifactId>-->
-            <!--                <version>3.0.0-M4</version>-->
-            <!--                <configuration>-->
-            <!--                    <suiteXmlFiles>-->
-            <!--                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>-->
-            <!--                    </suiteXmlFiles>-->
-            <!--                </configuration>-->
-            <!--            </plugin>-->
         </plugins>
     </build>
-
 </project>
