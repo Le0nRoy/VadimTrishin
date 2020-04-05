@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Test Maven Suite Sum and Sub">
+    <test name="Sum Testing">
+        <classes>
+            <class name="hw1.SumTest" />
+        </classes>
+    </test>
+    <test name="Sub Testing">
+        <classes>
+            <class name="hw1.SubTest" />
+        </classes>
+    </test>
+</suite>

@@ -1,4 +1,4 @@
 .idea*
 Materials*
 *.iml
-*/target/*
+target/*
