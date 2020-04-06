@@ -19,21 +19,27 @@
     <!--    Profiles descriptions-->
     <profiles>
         <profile>
-            <id>testMultAndDiv</id>
+            <id>hw2.ex1</id>
             <properties>
-                <build.profile.id>testMultAndDiv</build.profile.id>
+                <build.profile.id>hw2/ex1</build.profile.id>
             </properties>
         </profile>
         <profile>
-            <id>testAll</id>
+            <id>hw1.testMultAndDiv</id>
             <properties>
-                <build.profile.id>testAll</build.profile.id>
+                <build.profile.id>hw1/testMultAndDiv</build.profile.id>
             </properties>
         </profile>
         <profile>
-            <id>testSumAndSub</id>
+            <id>hw1.testAll</id>
             <properties>
-                <build.profile.id>testSumAndSub</build.profile.id>
+                <build.profile.id>hw1/testAll</build.profile.id>
+            </properties>
+        </profile>
+        <profile>
+            <id>hw1.testSumAndSub</id>
+            <properties>
+                <build.profile.id>hw1/testSumAndSub</build.profile.id>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
