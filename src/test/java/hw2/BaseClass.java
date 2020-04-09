@@ -24,18 +24,17 @@ public class BaseClass {
     private String testSiteURL = "https://jdi-testing.github.io/jdi-light/index.html";
 
     @Test(enabled = false)
+//    @Test
     public void openSiteByURLAndCheckItsTitleTest() {
 
-        chromeDriver.get(testSiteURL);
         String ret = chromeDriver.getTitle();
         String expected = "Home Page";
         assertEquals(ret, expected);
     }
 
     @Test(enabled = false)
+//    @Test
     public void loginAndCheckUsername() {
-
-        chromeDriver.get(testSiteURL);
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//ul//li//a[@href='#']"))).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("name"))).sendKeys("Roman");
@@ -67,6 +66,12 @@ public class BaseClass {
     protected void closeChrome() {
 
         chromeDriver.quit();
+    }
+
+    @BeforeMethod
+    protected void openTestSite() {
+
+        chromeDriver.get(testSiteURL);
     }
 
 }
