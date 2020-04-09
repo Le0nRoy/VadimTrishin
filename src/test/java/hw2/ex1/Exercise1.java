@@ -1,24 +1,26 @@
 package hw2.ex1;
 
 import hw2.BaseClass;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class Exercise1 extends BaseClass {
 
-    @Test
-    public void openSiteByURLAndCheckItsTitleTest() {
-        chromeDriver.get("https://jdi-testing.github.io/jdi-light/index.html");
-        String ret = chromeDriver.getTitle();
-        String expected = "Home Page";
-        assertEquals(ret, expected);
+    // FIXME delete after debugging
+    @Deprecated
+    private void sleep() {
 
-        // TODO replace with WebDriver wait methods (is it needed at all?)
         try {
-            Thread.sleep(5000);
+            Thread.sleep(WAIT_TIMEOUT);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
+
+
 }
