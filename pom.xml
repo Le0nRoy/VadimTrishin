@@ -25,6 +25,12 @@
             </properties>
         </profile>
         <profile>
+            <id>hw2.ex2</id>
+            <properties>
+                <build.profile.id>hw2/ex2</build.profile.id>
+            </properties>
+        </profile>
+        <profile>
             <id>hw1.testMultAndDiv</id>
             <properties>
                 <build.profile.id>hw1/testMultAndDiv</build.profile.id>
