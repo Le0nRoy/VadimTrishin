@@ -7,10 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 import static org.testng.Assert.*;
 
@@ -61,25 +58,25 @@ public class Exercise1 extends BaseClass {
 //    @Test
     private void checkExistanceOfIFrame() {
 
-        WebElement frameButton = chromeDriver.findElement(By.xpath("//input[@id='frame-button']"));
-//        WebElement frameButton = chromeDriver.findElement(By.xpath("//input[@value='Frame Button']"));
-//        WebElement frameButton = chromeDriver.findElement(By.xpath("//iframe//*[@id='frame-button']"));
-//        WebElement frameButton = chromeDriver.findElement(By.xpath("//iframe//*[@value='Frame Button']"));
-//        List<WebElement> elements = chromeDriver.findElements(By.tagName("iframe"));
+        WebElement frameButton = chromeDriver.findElement(By.xpath("//*[@id='frame'][contains(@src,'frame-button')]"));
 
-//        int numOfElements = elements.size();
-//        int numOfExceptions = 0;
-//        for (WebElement el : elements) {
-////            el.findElement(By.xpath("//input[@id='frame-button']"));
-//            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='frame-button']")));
-//        }
-//        assertNotEquals(numOfExceptions, numOfElements);
+        String result = frameButton.getAttribute("src");
+        String expected = "https://jdi-testing.github.io/jdi-light/frame-button.html";
+
+        assertEquals(result, expected);
     }
 
     @Test(enabled = false)
 //    @Test
     private void switchToIFrameAndCheckItsContents() {
 
+        chromeDriver.get(chromeDriver.findElement(By.xpath("//*[@id='frame']")).getAttribute("src"));
+        WebElement frameButton = chromeDriver.findElement(By.xpath("//*[@value='Frame Button']"));
+
+        String result = frameButton.getAttribute("value");
+        String expected = "Frame Button";
+
+        assertEquals(result, expected);
     }
 
     @Test(enabled = false)
@@ -111,6 +108,5 @@ public class Exercise1 extends BaseClass {
             e.printStackTrace();
         }
     }
-
 
 }
