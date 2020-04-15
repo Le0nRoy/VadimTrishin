@@ -23,8 +23,7 @@ public class Exercise2 extends BaseClass {
                 By.xpath("//../*[contains(text(),'Different elements')]"))).click();
     }
 
-        @Test(enabled = false)
-//    @Test
+    @Test
     private void selectCheckboxesAndAssertTheirStatuses() {
 
         List<WebElement> elements = chromeDriver.findElements(By.xpath("//*[@class='label-checkbox']"));
@@ -52,8 +51,7 @@ public class Exercise2 extends BaseClass {
         }
     }
 
-    @Test(enabled = false)
-//    @Test
+    @Test
     private void selectRadiobuttonsAndAssertTheirStatusses() {
 
         List<WebElement> elements = chromeDriver.findElements(By.xpath("//*[@class='label-radio']"));
@@ -78,8 +76,7 @@ public class Exercise2 extends BaseClass {
         }
     }
 
-    @Test(enabled = false)
-//    @Test
+    @Test
     private void selectInDropdownAndAssertItsStatus() {
 
         chromeDriver.findElement(By.xpath("//*[@class='colors']")).click();
