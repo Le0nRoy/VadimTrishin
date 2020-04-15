@@ -21,8 +21,6 @@ public class BaseClass {
     protected WebDriver chromeDriver;
     protected WebDriverWait wait;
 
-    private String testSiteURL = "https://jdi-testing.github.io/jdi-light/index.html";
-
     @Test(enabled = false)
 //    @Test
     public void openSiteByURLAndCheckItsTitleTest() {
@@ -35,11 +33,6 @@ public class BaseClass {
     @Test(enabled = false)
 //    @Test
     public void loginAndCheckUsername() {
-
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//ul//li//a[@href='#']"))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("name"))).sendKeys("Roman");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("password"))).sendKeys("Jdi1234");
-        wait.until(ExpectedConditions.elementToBeClickable(By.id("login-button"))).click();
 
         String result = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-name"))).getText();
         String expected = "ROMAN IOVLEV";
@@ -54,24 +47,26 @@ public class BaseClass {
     }
 
     @BeforeMethod
-    protected void openNewChrome() {
+    protected void openNewChromeWithTestSiteAndLogin() {
 
         chromeDriver = new ChromeDriver();
         wait = new WebDriverWait(chromeDriver, WAIT_TIMEOUT);
         chromeDriver.manage().window().maximize();
 //        chromeDriver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT, TimeUnit.SECONDS);
+
+        String testSiteURL = "https://jdi-testing.github.io/jdi-light/index.html";
+        chromeDriver.get(testSiteURL);
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//ul//li//a[@href='#']"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("name"))).sendKeys("Roman");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("password"))).sendKeys("Jdi1234");
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("login-button"))).click();
     }
 
     @AfterMethod
     protected void closeChrome() {
 
         chromeDriver.quit();
-    }
-
-    @BeforeMethod
-    protected void openTestSite() {
-
-        chromeDriver.get(testSiteURL);
     }
 
 }
