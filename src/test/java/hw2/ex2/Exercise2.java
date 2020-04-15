@@ -14,18 +14,10 @@ import static org.testng.Assert.*;
 
 public class Exercise2 extends BaseClass {
 
-    @BeforeMethod
-    private void switchToServiceDifferentElements() {
-
-        wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//ul[@class='uui-navigation nav navbar-nav m-l8']//*[contains(text(),'Service')]"))).click();
-        wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//../*[contains(text(),'Different elements')]"))).click();
-    }
-
     @Test
     private void selectCheckboxesAndAssertTheirStatuses() {
 
+        switchToServiceDifferentElements();
         List<WebElement> elements = chromeDriver.findElements(By.xpath("//*[@class='label-checkbox']"));
         String[] expectedOptions = {"Water", "Wind"};
 
@@ -54,6 +46,7 @@ public class Exercise2 extends BaseClass {
     @Test
     private void selectRadiobuttonsAndAssertTheirStatusses() {
 
+        switchToServiceDifferentElements();
         List<WebElement> elements = chromeDriver.findElements(By.xpath("//*[@class='label-radio']"));
         String expectedOption = "Selen";
 
@@ -79,6 +72,7 @@ public class Exercise2 extends BaseClass {
     @Test
     private void selectInDropdownAndAssertItsStatus() {
 
+        switchToServiceDifferentElements();
         chromeDriver.findElement(By.xpath("//*[@class='colors']")).click();
         String expectedOption = "Yellow";
 
@@ -99,6 +93,14 @@ public class Exercise2 extends BaseClass {
                 assertTrue(el.getText().contains("value changed to " + expectedOption));
             }
         }
+    }
+
+    private void switchToServiceDifferentElements() {
+
+        wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//ul[@class='uui-navigation nav navbar-nav m-l8']//*[contains(text(),'Service')]"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//../*[contains(text(),'Different elements')]"))).click();
     }
 
 }

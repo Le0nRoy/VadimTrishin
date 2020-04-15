@@ -6,10 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static org.testng.Assert.assertEquals;
 
@@ -36,7 +33,7 @@ public class BaseClass {
         assertEquals(result, expected);
     }
 
-    @BeforeSuite
+    @BeforeTest
     protected void setupChromeDriver() {
 
         WebDriverManager.chromedriver().setup();
@@ -50,7 +47,7 @@ public class BaseClass {
         chromeDriver.manage().window().maximize();
 //        chromeDriver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT, TimeUnit.SECONDS);
 
-        String testSiteURL = "https://jdi-testing.github.io/jdi-light/index.html";
+        String testSiteURL = "https://jdi-testing.github.io/jdi-light";
         chromeDriver.get(testSiteURL);
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//ul//li//a[@href='#']"))).click();
