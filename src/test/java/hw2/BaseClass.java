@@ -11,8 +11,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-
 import static org.testng.Assert.assertEquals;
 
 public class BaseClass {
@@ -21,8 +19,7 @@ public class BaseClass {
     protected WebDriver chromeDriver;
     protected WebDriverWait wait;
 
-    @Test(enabled = false)
-//    @Test
+    @Test
     public void openSiteByURLAndCheckItsTitleTest() {
 
         String ret = chromeDriver.getTitle();
@@ -30,8 +27,7 @@ public class BaseClass {
         assertEquals(ret, expected);
     }
 
-    @Test(enabled = false)
-//    @Test
+    @Test
     public void loginAndCheckUsername() {
 
         String result = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-name"))).getText();

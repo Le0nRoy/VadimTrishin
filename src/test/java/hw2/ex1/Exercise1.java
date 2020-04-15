@@ -3,8 +3,6 @@ package hw2.ex1;
 import hw2.BaseClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
 import java.util.*;
@@ -13,8 +11,7 @@ import static org.testng.Assert.*;
 
 public class Exercise1 extends BaseClass {
 
-    @Test(enabled = false)
-//    @Test
+    @Test
     private void checkItemsOnHeader() {
 
         List<WebElement> elements = chromeDriver.findElements(
@@ -32,8 +29,7 @@ public class Exercise1 extends BaseClass {
         assertNotSame(elements, expectedNames);
     }
 
-    @Test(enabled = false)
-//    @Test
+    @Test
     private void checkImagesOnIndexPage() {
 
         List<WebElement> elements = chromeDriver.findElements(By.className("benefit-icon"));
@@ -43,8 +39,7 @@ public class Exercise1 extends BaseClass {
         assertEquals(elements.size(), expectedNumOfImages);
     }
 
-    @Test(enabled = false)
-//    @Test
+    @Test
     private void checkTextsOnIndexPage() {
 
         List<WebElement> elements = chromeDriver.findElements(By.className("benefit-txt"));
@@ -54,8 +49,7 @@ public class Exercise1 extends BaseClass {
         assertEquals(elements.size(), expectedNumOfTexts);
     }
 
-    @Test(enabled = false)
-//    @Test
+    @Test
     private void checkExistanceOfIFrame() {
 
         WebElement frameButton = chromeDriver.findElement(By.xpath("//*[@id='frame'][contains(@src,'frame-button')]"));
@@ -66,8 +60,7 @@ public class Exercise1 extends BaseClass {
         assertEquals(result, expected);
     }
 
-    @Test(enabled = false)
-//    @Test
+    @Test
     private void switchToIFrameAndCheckItsContents() {
 
         chromeDriver.get(chromeDriver.findElement(By.xpath("//*[@id='frame']")).getAttribute("src"));
@@ -79,8 +72,7 @@ public class Exercise1 extends BaseClass {
         assertEquals(result, expected);
     }
 
-    @Test(enabled = false)
-//    @Test
+    @Test
     private void checkItemsOnLeftSection() {
 
         List<WebElement> elements = chromeDriver.findElements(By.xpath("//ul[@class='sidebar-menu']/li/a/span"));
@@ -96,17 +88,6 @@ public class Exercise1 extends BaseClass {
 
         assertEquals(elements.size(), expectedNumOfElements);
         assertNotSame(elements, expectedNames);
-    }
-
-    // FIXME delete after debugging
-    @Deprecated
-    private void sleep() {
-
-        try {
-            Thread.sleep(WAIT_TIMEOUT);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
 }
