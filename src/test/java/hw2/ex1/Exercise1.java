@@ -22,8 +22,9 @@ public class Exercise1 extends BaseClass {
         loginAndCheckUsername();
 
         // Task 5
-        List<WebElement> elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
-                By.xpath("//ul[@class='uui-navigation nav navbar-nav m-l8']/li")));
+        List<WebElement> elements = chromeDriver.findElements(
+                By.cssSelector(".navbar-nav > li > a"));
+
 
         int expectedNumOfElements = 4;
         List<String> expectedNames = new ArrayList<String>(Arrays.asList(
@@ -43,6 +44,7 @@ public class Exercise1 extends BaseClass {
         softAssert.assertEquals(elements.size(), expectedNumOfImages);
 
         // Task 7
+        // FIXME should check texts under images
         elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
                 By.className("benefit-txt")));
         int expectedNumOfTexts = 4;
@@ -68,8 +70,8 @@ public class Exercise1 extends BaseClass {
         openSiteByURLAndCheckItsTitleTest();
 
         // Task 11
-        elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
-                By.xpath("//ul[@class='sidebar-menu']/li/a/span")));
+        elements = chromeDriver.findElements(
+                By.cssSelector(".sidebar-menu span"));
         expectedNumOfElements = 5;
         expectedNames = new ArrayList<String>(Arrays.asList(
                 "Home",

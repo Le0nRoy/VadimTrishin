@@ -28,7 +28,7 @@ public class Exercise2 extends BaseClass {
 
         // Task 5
         wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//ul[@class='uui-navigation nav navbar-nav m-l8']//*[contains(text(),'Service')]"))).click();
+                By.xpath("//*[contains(text(),'Service')]"))).click();
         wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//../*[contains(text(),'Different elements')]"))).click();
 

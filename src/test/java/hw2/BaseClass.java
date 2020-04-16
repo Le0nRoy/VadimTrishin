@@ -13,7 +13,7 @@ import static org.testng.Assert.assertEquals;
 
 public class BaseClass {
 
-    final protected int WAIT_TIMEOUT = 10;
+    final protected int WAIT_TIMEOUT = 5;
     final protected String TEST_SITE_URL = "https://jdi-testing.github.io/jdi-light";
     protected WebDriver chromeDriver;
     protected WebDriverWait wait;
