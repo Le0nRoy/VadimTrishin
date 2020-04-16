@@ -44,11 +44,10 @@ public class Exercise1 extends BaseClass {
         softAssert.assertEquals(elements.size(), expectedNumOfImages);
 
         // Task 7
-        // FIXME should check texts under images
         elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
                 By.className("benefit-txt")));
-        int expectedNumOfTexts = 4;
-        softAssert.assertEquals(elements.size(), expectedNumOfTexts);
+        int expectedNumOfTextsUnderImages = 4;
+        softAssert.assertEquals(elements.size(), expectedNumOfTextsUnderImages);
 
         // Task 8
         WebElement frameButton = wait.until(ExpectedConditions.visibilityOfElementLocated(
