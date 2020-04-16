@@ -7,29 +7,31 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
+import org.testng.asserts.SoftAssert;
 
 import static org.testng.Assert.assertEquals;
 
 public class BaseClass {
 
     final protected int WAIT_TIMEOUT = 10;
+    final protected String TEST_SITE_URL = "https://jdi-testing.github.io/jdi-light";
     protected WebDriver chromeDriver;
     protected WebDriverWait wait;
+    protected SoftAssert softAssert;
 
-    @Test
-    public void openSiteByURLAndCheckItsTitleTest() {
+    protected void openSiteByURLAndCheckItsTitleTest() {
 
         String ret = chromeDriver.getTitle();
         String expected = "Home Page";
+        // Using here strong assert because some tests are dependent on this one
         assertEquals(ret, expected);
     }
 
-    @Test
-    public void loginAndCheckUsername() {
+    protected void loginAndCheckUsername() {
 
         String result = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-name"))).getText();
         String expected = "ROMAN IOVLEV";
-
+        // Using here strong assert because some tests are dependent on this one
         assertEquals(result, expected);
     }
 
@@ -37,18 +39,13 @@ public class BaseClass {
     protected void setupChromeDriver() {
 
         WebDriverManager.chromedriver().setup();
-    }
-
-    @BeforeMethod
-    protected void openNewChromeWithTestSiteAndLogin() {
+        softAssert = new SoftAssert();
 
         chromeDriver = new ChromeDriver();
         wait = new WebDriverWait(chromeDriver, WAIT_TIMEOUT);
         chromeDriver.manage().window().maximize();
-//        chromeDriver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT, TimeUnit.SECONDS);
 
-        String testSiteURL = "https://jdi-testing.github.io/jdi-light";
-        chromeDriver.get(testSiteURL);
+        chromeDriver.get(TEST_SITE_URL);
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//ul//li//a[@href='#']"))).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("name"))).sendKeys("Roman");
@@ -56,7 +53,7 @@ public class BaseClass {
         wait.until(ExpectedConditions.elementToBeClickable(By.id("login-button"))).click();
     }
 
-    @AfterMethod
+    @AfterTest
     protected void closeChrome() {
 
         chromeDriver.quit();

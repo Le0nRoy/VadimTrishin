@@ -3,19 +3,25 @@ package hw2.ex1;
 import hw2.BaseClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
 import java.util.*;
 
-import static org.testng.Assert.*;
-
 public class Exercise1 extends BaseClass {
 
     @Test
-    private void checkItemsOnHeader() {
+    private void exerciseTest() {
 
-        List<WebElement> elements = chromeDriver.findElements(
-                By.xpath("//ul[@class='uui-navigation nav navbar-nav m-l8']/li"));
+        // Tasks 1 - 2
+        openSiteByURLAndCheckItsTitleTest();
+
+        // Tasks 3 - 4
+        loginAndCheckUsername();
+
+        // Task 5
+        List<WebElement> elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+                By.xpath("//ul[@class='uui-navigation nav navbar-nav m-l8']/li")));
 
         int expectedNumOfElements = 4;
         List<String> expectedNames = new ArrayList<String>(Arrays.asList(
@@ -25,69 +31,53 @@ public class Exercise1 extends BaseClass {
                 "Metals & Colors"
         ));
 
-        assertEquals(elements.size(), expectedNumOfElements);
-        assertNotSame(elements, expectedNames);
-    }
+        softAssert.assertEquals(elements.size(), expectedNumOfElements);
+        softAssert.assertNotSame(elements, expectedNames);
 
-    @Test
-    private void checkImagesOnIndexPage() {
-
-        List<WebElement> elements = chromeDriver.findElements(By.className("benefit-icon"));
-
+        // Task 6
+        elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+                By.className("benefit-icon")));
         int expectedNumOfImages = 4;
+        softAssert.assertEquals(elements.size(), expectedNumOfImages);
 
-        assertEquals(elements.size(), expectedNumOfImages);
-    }
-
-    @Test
-    private void checkTextsOnIndexPage() {
-
-        List<WebElement> elements = chromeDriver.findElements(By.className("benefit-txt"));
-
+        // Task 7
+        elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+                By.className("benefit-txt")));
         int expectedNumOfTexts = 4;
+        softAssert.assertEquals(elements.size(), expectedNumOfTexts);
 
-        assertEquals(elements.size(), expectedNumOfTexts);
-    }
-
-    @Test
-    private void checkExistanceOfIFrame() {
-
-        WebElement frameButton = chromeDriver.findElement(By.xpath("//*[@id='frame'][contains(@src,'frame-button')]"));
-
+        // Task 8
+        WebElement frameButton = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//*[@id='frame'][contains(@src,'frame-button')]")));
         String result = frameButton.getAttribute("src");
         String expected = "https://jdi-testing.github.io/jdi-light/frame-button.html";
+        softAssert.assertEquals(result, expected);
 
-        assertEquals(result, expected);
-    }
-
-    @Test
-    private void switchToIFrameAndCheckItsContents() {
-
+        // Task 9
         chromeDriver.get(chromeDriver.findElement(By.xpath("//*[@id='frame']")).getAttribute("src"));
-        WebElement frameButton = chromeDriver.findElement(By.xpath("//*[@value='Frame Button']"));
+        frameButton = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//*[@value='Frame Button']")));
+        result = frameButton.getAttribute("value");
+        expected = "Frame Button";
+        softAssert.assertEquals(result, expected);
 
-        String result = frameButton.getAttribute("value");
-        String expected = "Frame Button";
+        // Task 10
+        chromeDriver.get(TEST_SITE_URL);
+        openSiteByURLAndCheckItsTitleTest();
 
-        assertEquals(result, expected);
-    }
-
-    @Test
-    private void checkItemsOnLeftSection() {
-
-        List<WebElement> elements = chromeDriver.findElements(By.xpath("//ul[@class='sidebar-menu']/li/a/span"));
-
-        int expectedNumOfElements = 5;
-        List<String> expectedNames = new ArrayList<String>(Arrays.asList(
+        // Task 11
+        elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+                By.xpath("//ul[@class='sidebar-menu']/li/a/span")));
+        expectedNumOfElements = 5;
+        expectedNames = new ArrayList<String>(Arrays.asList(
                 "Home",
                 "Contact form",
                 "Service",
                 "Metals & Colors",
                 "Elements packs"
         ));
-
-        assertEquals(elements.size(), expectedNumOfElements);
-        assertNotSame(elements, expectedNames);
+        softAssert.assertEquals(elements.size(), expectedNumOfElements);
+        softAssert.assertNotSame(elements, expectedNames);
     }
 
 }
