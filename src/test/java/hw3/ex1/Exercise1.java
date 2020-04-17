@@ -4,6 +4,7 @@ import hw3.BaseClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -13,13 +14,14 @@ import java.util.List;
 public class Exercise1 extends BaseClass {
 
     @Test
-    private void exerciseTest() {
+    @Parameters({"userName", "password"})
+    private void exerciseTest(String userName, CharSequence password) {
 
         // Tasks 1 - 2
         openSiteByURLAndCheckItsTitleTest();
 
         // Tasks 3 - 4
-        loginAndCheckUsername();
+        loginAndCheckUsername(userName, password);
 
         // Task 5
         List<WebElement> elements = chromeDriver.findElements(
@@ -65,7 +67,7 @@ public class Exercise1 extends BaseClass {
         softAssert.assertEquals(result, expected);
 
         // Task 10
-        chromeDriver.get(TEST_SITE_URL);
+        indexPage.open();
         openSiteByURLAndCheckItsTitleTest();
 
         // Task 11

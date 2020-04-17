@@ -24,15 +24,9 @@
     <!--    Profiles descriptions-->
     <profiles>
         <profile>
-            <id>hw3.ex1</id>
+            <id>hw3</id>
             <properties>
-                <build.profile.id>hw3/ex1</build.profile.id>
-            </properties>
-        </profile>
-        <profile>
-            <id>hw3.ex2</id>
-            <properties>
-                <build.profile.id>hw3/ex2</build.profile.id>
+                <build.profile.id>hw3</build.profile.id>
             </properties>
         </profile>
         <profile>

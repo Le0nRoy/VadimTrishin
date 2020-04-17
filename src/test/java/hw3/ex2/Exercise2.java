@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -17,13 +18,14 @@ import static org.testng.Assert.assertTrue;
 public class Exercise2 extends BaseClass {
 
     @Test
-    private void exerciseTest() {
+    @Parameters({"userName", "password"})
+    private void exerciseTest(String userName, CharSequence password) {
 
         // Tasks 1 - 2
         openSiteByURLAndCheckItsTitleTest();
 
         // Tasks 3 - 4
-        loginAndCheckUsername();
+        loginAndCheckUsername(userName, password);
 
         // Task 5
         wait.until(ExpectedConditions.elementToBeClickable(
