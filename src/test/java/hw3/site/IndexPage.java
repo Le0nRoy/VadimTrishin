@@ -23,50 +23,9 @@ public class IndexPage extends PageObject implements Constants {
         wait = new WebDriverWait(driver, WAIT_TIMEOUT);
     }
 
-    @FindBy(css = ".navbar-nav > li > a")
-    private List<WebElement> navigationHeaderItems;
-
-    public List<WebElement> getnavigationHeaderItems() {
-
-        return navigationHeaderItems;
-    }
-
-    public void clickHeaderItem(final String headerItem) {
-
-        for (WebElement el : navigationHeaderItems) {
-            if (headerItem.equals(el.getText())) {
-                el.click();
-                break;
-            }
-        }
-    }
-
-    @FindBy(css = ".sidebar-menu span")
-    private List<WebElement> leftMenuItems;
-
-    public List<WebElement> getLeftMenuItems() {
-
-        return leftMenuItems;
-    }
-
-    public void clickMenuItem(final String menuItem) {
-
-        for (WebElement el : leftMenuItems) {
-            if (menuItem.equals(el.getText())) {
-                el.click();
-                break;
-            }
-        }
-    }
-
     public void open() {
 
         driver.get(TEST_SITE_URL);
-    }
-
-    public void closeChrome() {
-
-        driver.quit();
     }
 
     public void login(String userName, String password) {
@@ -79,9 +38,56 @@ public class IndexPage extends PageObject implements Constants {
         wait.until(ExpectedConditions.elementToBeClickable(By.id("login-button"))).click();
     }
 
-    public WebDriver getChromeDriver() {
+    @FindBy(css = ".navbar-nav > li > a")
+    private List<WebElement> navigationHeaderItems;
+    public List<WebElement> getnavigationHeaderItems() {
 
-        return driver;
+        return navigationHeaderItems;
+    }
+    public void clickHeaderItem(final String headerItem) {
+
+        for (WebElement el : navigationHeaderItems) {
+            if (headerItem.equals(el.getText())) {
+                el.click();
+                break;
+            }
+        }
     }
 
+    @FindBy(css = ".sidebar-menu span")
+    private List<WebElement> leftMenuItems;
+    public List<WebElement> getLeftMenuItems() {
+
+        return leftMenuItems;
+    }
+    public void clickMenuItem(final String menuItem) {
+
+        for (WebElement el : leftMenuItems) {
+            if (menuItem.equals(el.getText())) {
+                el.click();
+                break;
+            }
+        }
+    }
+
+    @FindBy(className = "benefit-icon")
+    private List<WebElement> benefitIcons;
+    public List<WebElement> getbenefitIcons() {
+
+        return benefitIcons;
+    }
+
+    @FindBy(className = "benefit-txt")
+    private List<WebElement> benefitTexts;
+    public List<WebElement> getBenefitTexts() {
+
+        return benefitTexts;
+    }
+
+    @FindBy(xpath = "//*[@id='frame'][contains(@src,'frame-button')]")
+    private WebElement frameButton;
+    public WebElement getFrameButton() {
+
+        return frameButton;
+    }
 }

@@ -36,7 +36,7 @@ public class Exercise2 extends BaseTestClass {
 
         // FIXME refactor to PageComponents
         // Task 6
-        List<WebElement> elements = indexPage.getChromeDriver().findElements(By.className("label-checkbox"));
+        List<WebElement> elements = chromeDriver.findElements(By.className("label-checkbox"));
         ArrayList<String> expectedOptionsCheckboxes = new ArrayList<String>(Arrays.asList(
                 "Water",
                 "Wind"
@@ -53,7 +53,7 @@ public class Exercise2 extends BaseTestClass {
 
         // FIXME refactor to PageComponents
         // Task 7
-        elements = indexPage.getChromeDriver().findElements(By.className("label-radio"));
+        elements = chromeDriver.findElements(By.className("label-radio"));
         ArrayList<String> expectedOptionsRadioButtons = new ArrayList<String>(Arrays.asList(
                 "Selen"
         ));
@@ -69,7 +69,7 @@ public class Exercise2 extends BaseTestClass {
 
         // FIXME refactor to PageComponents
         // Task 8
-        WebElement element = indexPage.getChromeDriver().findElement(By.xpath("//*[@class='colors']"));
+        WebElement element = chromeDriver.findElement(By.xpath("//*[@class='colors']"));
         element.click();
         Select select = new Select(element.findElement(
                 By.tagName("select")));
@@ -83,7 +83,7 @@ public class Exercise2 extends BaseTestClass {
 
         // Fixme Refactor to PageComponents
         // Task 9
-        elements = indexPage.getChromeDriver().findElements(By.xpath("//*[@class='info-panel-section']//li"));
+        elements = chromeDriver.findElements(By.xpath("//*[@class='info-panel-section']//li"));
 
         for (Iterator<WebElement> iterator = elements.iterator(); iterator.hasNext(); ) {
             WebElement el = iterator.next();

@@ -47,7 +47,7 @@ public class BaseTestClass implements Constants {
 
         indexPage.open();
 
-        String ret = indexPage.getChromeDriver().getTitle();
+        String ret = chromeDriver.getTitle();
         String expected = "Home Page";
 
         // Using here strong assert because some tests are dependent on this one
