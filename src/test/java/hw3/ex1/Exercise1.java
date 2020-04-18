@@ -1,6 +1,7 @@
 package hw3.ex1;
 
-import hw3.BaseClass;
+import hw3.BaseTestClass;
+import hw3.site.IndexPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,11 +12,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Exercise1 extends BaseClass {
+public class Exercise1 extends BaseTestClass {
 
     @Test
     @Parameters({"userName", "password"})
-    private void exerciseTest(String userName, CharSequence password) {
+    private void exerciseTest(String userName, String password) {
 
         // Tasks 1 - 2
         openSiteByURLAndCheckItsTitleTest();
@@ -24,9 +25,9 @@ public class Exercise1 extends BaseClass {
         loginAndCheckUsername(userName, password);
 
         // Task 5
-        List<WebElement> elements = chromeDriver.findElements(
-                By.cssSelector(".navbar-nav > li > a"));
+        IndexPage.PageComponents pageComponents = indexPage.new PageComponents();
 
+        List<WebElement> elements = pageComponents.getHeaderMenu().getnavigationHeaderItems();
 
         int expectedNumOfElements = 4;
         List<String> expectedNames = new ArrayList<String>(Arrays.asList(
@@ -39,18 +40,21 @@ public class Exercise1 extends BaseClass {
         softAssert.assertEquals(elements.size(), expectedNumOfElements);
         softAssert.assertNotSame(elements, expectedNames);
 
+        // fixme refactor
         // Task 6
         elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
                 By.className("benefit-icon")));
         int expectedNumOfImages = 4;
         softAssert.assertEquals(elements.size(), expectedNumOfImages);
 
+        // fixme refactor
         // Task 7
         elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
                 By.className("benefit-txt")));
         int expectedNumOfTextsUnderImages = 4;
         softAssert.assertEquals(elements.size(), expectedNumOfTextsUnderImages);
 
+        // fixme refactor
         // Task 8
         WebElement frameButton = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//*[@id='frame'][contains(@src,'frame-button')]")));
@@ -58,8 +62,10 @@ public class Exercise1 extends BaseClass {
         String expected = "https://jdi-testing.github.io/jdi-light/frame-button.html";
         softAssert.assertEquals(result, expected);
 
+        // fixme refactor
         // Task 9
-        chromeDriver.get(chromeDriver.findElement(By.xpath("//*[@id='frame']")).getAttribute("src"));
+        indexPage.getChromeDriver().get(indexPage.getChromeDriver().findElement(
+                By.xpath("//*[@id='frame']")).getAttribute("src"));
         frameButton = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//*[@value='Frame Button']")));
         result = frameButton.getAttribute("value");
@@ -71,8 +77,10 @@ public class Exercise1 extends BaseClass {
         openSiteByURLAndCheckItsTitleTest();
 
         // Task 11
-        elements = chromeDriver.findElements(
-                By.cssSelector(".sidebar-menu span"));
+        elements = pageComponents.getLeftSideMenu().getLeftMenuItems();
+//        elements = chromeDriver.findElements(
+//                By.cssSelector(".sidebar-menu span"));
+
         expectedNumOfElements = 5;
         expectedNames = new ArrayList<String>(Arrays.asList(
                 "Home",
@@ -81,8 +89,8 @@ public class Exercise1 extends BaseClass {
                 "Metals & Colors",
                 "Elements packs"
         ));
+
         softAssert.assertEquals(elements.size(), expectedNumOfElements);
         softAssert.assertNotSame(elements, expectedNames);
     }
-
 }

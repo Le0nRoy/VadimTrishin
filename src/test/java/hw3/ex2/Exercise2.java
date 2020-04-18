@@ -1,6 +1,6 @@
 package hw3.ex2;
 
-import hw3.BaseClass;
+import hw3.BaseTestClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,11 +15,11 @@ import java.util.List;
 
 import static org.testng.Assert.assertTrue;
 
-public class Exercise2 extends BaseClass {
+public class Exercise2 extends BaseTestClass {
 
-    @Test
+    @Test(enabled = false)
     @Parameters({"userName", "password"})
-    private void exerciseTest(String userName, CharSequence password) {
+    private void exerciseTest(String userName, String password) {
 
         // Tasks 1 - 2
         openSiteByURLAndCheckItsTitleTest();
@@ -27,14 +27,16 @@ public class Exercise2 extends BaseClass {
         // Tasks 3 - 4
         loginAndCheckUsername(userName, password);
 
+        // FIXME refactor to PageObject
         // Task 5
         wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//*[contains(text(),'Service')]"))).click();
         wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//../*[contains(text(),'Different elements')]"))).click();
 
+        // FIXME refactor to PageComponents
         // Task 6
-        List<WebElement> elements = chromeDriver.findElements(By.className("label-checkbox"));
+        List<WebElement> elements = indexPage.getChromeDriver().findElements(By.className("label-checkbox"));
         ArrayList<String> expectedOptionsCheckboxes = new ArrayList<String>(Arrays.asList(
                 "Water",
                 "Wind"
@@ -49,8 +51,9 @@ public class Exercise2 extends BaseClass {
             }
         }
 
+        // FIXME refactor to PageComponents
         // Task 7
-        elements = chromeDriver.findElements(By.className("label-radio"));
+        elements = indexPage.getChromeDriver().findElements(By.className("label-radio"));
         ArrayList<String> expectedOptionsRadioButtons = new ArrayList<String>(Arrays.asList(
                 "Selen"
         ));
@@ -64,8 +67,9 @@ public class Exercise2 extends BaseClass {
             }
         }
 
+        // FIXME refactor to PageComponents
         // Task 8
-        WebElement element = chromeDriver.findElement(By.xpath("//*[@class='colors']"));
+        WebElement element = indexPage.getChromeDriver().findElement(By.xpath("//*[@class='colors']"));
         element.click();
         Select select = new Select(element.findElement(
                 By.tagName("select")));
@@ -77,8 +81,9 @@ public class Exercise2 extends BaseClass {
             select.selectByVisibleText(option);
         }
 
+        // Fixme Refactor to PageComponents
         // Task 9
-        elements = chromeDriver.findElements(By.xpath("//*[@class='info-panel-section']//li"));
+        elements = indexPage.getChromeDriver().findElements(By.xpath("//*[@class='info-panel-section']//li"));
 
         for (Iterator<WebElement> iterator = elements.iterator(); iterator.hasNext(); ) {
             WebElement el = iterator.next();
@@ -100,5 +105,4 @@ public class Exercise2 extends BaseClass {
             }
         }
     }
-
 }
