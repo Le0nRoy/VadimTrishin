@@ -1,104 +1,72 @@
 package hw3.site;
 
 import hw3.Constants;
-import io.github.bonigarcia.wdm.WebDriverManager;
+import hw3.PageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class IndexPage implements Constants {
+public class IndexPage extends PageObject implements Constants {
 
-    protected WebDriver chromeDriver;
     protected WebDriverWait wait;
 
-    public class PageComponents {
+    public IndexPage(WebDriver driver) {
 
-        private HeaderMenu headerMenu;
-        private LeftSideMenu leftSideMenu;
+        super(driver);
+        wait = new WebDriverWait(driver, WAIT_TIMEOUT);
+    }
 
-        public PageComponents() {
+    @FindBy(css = ".navbar-nav > li > a")
+    private List<WebElement> navigationHeaderItems;
 
-            headerMenu = new HeaderMenu();
-            leftSideMenu = new LeftSideMenu();
-        }
+    public List<WebElement> getnavigationHeaderItems() {
 
-        public HeaderMenu getHeaderMenu() {
+        return navigationHeaderItems;
+    }
 
-            return headerMenu;
-        }
+    public void clickHeaderItem(final String headerItem) {
 
-        public LeftSideMenu getLeftSideMenu() {
-
-            return leftSideMenu;
-        }
-
-        public class HeaderMenu {
-
-            @FindBy(css = ".navbar-nav > li > a")
-            private List<WebElement> navigationHeaderItems;
-
-            public List<WebElement> getnavigationHeaderItems() {
-
-                return navigationHeaderItems;
-            }
-
-            public void clickHeaderItem(final String headerItem) {
-
-                for (WebElement el : navigationHeaderItems) {
-                    if (headerItem.equals(el.getText())) {
-                        el.click();
-                        break;
-                    }
-                }
-            }
-
-        }
-
-        public class LeftSideMenu {
-
-            @FindBy(css = ".sidebar-menu span")
-            private List<WebElement> leftMenuItems;
-
-            public List<WebElement> getLeftMenuItems() {
-
-                return leftMenuItems;
-            }
-
-            public void clickMenuItem(final String menuItem) {
-
-                for (WebElement el : leftMenuItems) {
-                    if (menuItem.equals(el.getText())) {
-                        el.click();
-                        break;
-                    }
-                }
+        for (WebElement el : navigationHeaderItems) {
+            if (headerItem.equals(el.getText())) {
+                el.click();
+                break;
             }
         }
     }
 
-    public void setup() {
+    @FindBy(css = ".sidebar-menu span")
+    private List<WebElement> leftMenuItems;
 
-        WebDriverManager.chromedriver().setup();
-        chromeDriver = new ChromeDriver();
-        chromeDriver.manage().window().maximize();
-        wait = new WebDriverWait(chromeDriver, WAIT_TIMEOUT);
+    public List<WebElement> getLeftMenuItems() {
+
+        return leftMenuItems;
+    }
+
+    public void clickMenuItem(final String menuItem) {
+
+        for (WebElement el : leftMenuItems) {
+            if (menuItem.equals(el.getText())) {
+                el.click();
+                break;
+            }
+        }
     }
 
     public void open() {
 
-        chromeDriver.get(TEST_SITE_URL);
+        driver.get(TEST_SITE_URL);
     }
 
     public void closeChrome() {
 
-        chromeDriver.quit();
+        driver.quit();
     }
 
     public void login(String userName, String password) {
@@ -113,7 +81,7 @@ public class IndexPage implements Constants {
 
     public WebDriver getChromeDriver() {
 
-        return chromeDriver;
+        return driver;
     }
 
 }

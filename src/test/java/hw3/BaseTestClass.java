@@ -1,7 +1,12 @@
 package hw3;
 
 import hw3.site.IndexPage;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -14,26 +19,30 @@ import static org.testng.Assert.assertEquals;
 
 public class BaseTestClass implements Constants {
 
+    protected WebDriver chromeDriver;
     protected WebDriverWait wait;
     protected SoftAssert softAssert;
 
-    protected IndexPage indexPage = new IndexPage();
+    protected IndexPage indexPage;
 
     @BeforeTest
     protected void beforeTestMethod() {
 
-        indexPage.setup();
+        WebDriverManager.chromedriver().setup();
+        chromeDriver = new ChromeDriver();
+        chromeDriver.manage().window().maximize();
         softAssert = new SoftAssert();
-        wait = new WebDriverWait(indexPage.getChromeDriver(), WAIT_TIMEOUT);
+        wait = new WebDriverWait(chromeDriver, WAIT_TIMEOUT);
+
+        indexPage = PageFactory.initElements(chromeDriver, IndexPage.class);
     }
 
     @AfterTest
     protected void closeChrome() {
 
-        indexPage.closeChrome();
+        chromeDriver.close();
     }
 
-//    @Test
     protected void openSiteByURLAndCheckItsTitleTest() {
 
         indexPage.open();

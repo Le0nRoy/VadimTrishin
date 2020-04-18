@@ -1,7 +1,6 @@
 package hw3.ex1;
 
 import hw3.BaseTestClass;
-import hw3.site.IndexPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -25,9 +24,7 @@ public class Exercise1 extends BaseTestClass {
         loginAndCheckUsername(userName, password);
 
         // Task 5
-        IndexPage.PageComponents pageComponents = indexPage.new PageComponents();
-
-        List<WebElement> elements = pageComponents.getHeaderMenu().getnavigationHeaderItems();
+        List<WebElement> elements = indexPage.getnavigationHeaderItems();
 
         int expectedNumOfElements = 4;
         List<String> expectedNames = new ArrayList<String>(Arrays.asList(
@@ -77,9 +74,7 @@ public class Exercise1 extends BaseTestClass {
         openSiteByURLAndCheckItsTitleTest();
 
         // Task 11
-        elements = pageComponents.getLeftSideMenu().getLeftMenuItems();
-//        elements = chromeDriver.findElements(
-//                By.cssSelector(".sidebar-menu span"));
+        elements = indexPage.getLeftMenuItems();
 
         expectedNumOfElements = 5;
         expectedNames = new ArrayList<String>(Arrays.asList(
