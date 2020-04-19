@@ -56,7 +56,14 @@ public class DifferentElementsPage implements Constants {
         return infoPanelObject;
     }
 
-    public class CheckboxesObject extends PageComponent {
+    public interface SelectableElementComponent {
+
+        List<WebElement> getElements();
+        void selectElement(String elementName);
+        boolean isElementSelected(String elementName);
+    }
+
+    private class CheckboxesObject extends PageComponent implements SelectableElementComponent {
 
         @FindBy(className = "label-checkbox")
         List<WebElement> checkboxes;
@@ -64,11 +71,11 @@ public class DifferentElementsPage implements Constants {
 
             super(driver);
         }
-        public List<WebElement> getCheckboxes() {
+        public List<WebElement> getElements() {
 
             return checkboxes;
         }
-        public void clickCheckbox(String checkboxName) {
+        public void selectElement(String checkboxName) {
 
             for (Iterator<WebElement> iterator = checkboxes.iterator(); iterator.hasNext(); ) {
                 WebElement el = iterator.next();
@@ -78,7 +85,7 @@ public class DifferentElementsPage implements Constants {
                 }
             }
         }
-        public boolean isCheckboxSelected(String checkboxName) {
+        public boolean isElementSelected(String checkboxName) {
 
             for (Iterator<WebElement> iterator = checkboxes.iterator(); iterator.hasNext(); ) {
                 WebElement el = iterator.next();
@@ -91,7 +98,7 @@ public class DifferentElementsPage implements Constants {
 
     }
 
-    public class RadioButtonsObject extends PageComponent {
+    private class RadioButtonsObject extends PageComponent implements SelectableElementComponent {
 
         @FindBy(className = "label-radio")
         List<WebElement> radioButtons;
@@ -99,11 +106,11 @@ public class DifferentElementsPage implements Constants {
 
             super(driver);
         }
-        public List<WebElement> getRadioButtons() {
+        public List<WebElement> getElements() {
 
             return radioButtons;
         }
-        public void selectRadioButton(String radioButtonName) {
+        public void selectElement(String radioButtonName) {
 
             for (Iterator<WebElement> iterator = radioButtons.iterator(); iterator.hasNext(); ) {
                 WebElement el = iterator.next();
@@ -113,7 +120,7 @@ public class DifferentElementsPage implements Constants {
                 }
             }
         }
-        public boolean isRadioButtonSelected(String radioButtonName) {
+        public boolean isElementSelected(String radioButtonName) {
 
             for (Iterator<WebElement> iterator = radioButtons.iterator(); iterator.hasNext(); ) {
                 WebElement el = iterator.next();
@@ -125,7 +132,7 @@ public class DifferentElementsPage implements Constants {
         }
     }
 
-    public class ColorsSelectObject extends PageComponent {
+    private class ColorsSelectObject extends PageComponent implements SelectableElementComponent {
 
         @FindBy(xpath = "//*[@class='colors']")
         WebElement colorsSelect;
@@ -133,18 +140,18 @@ public class DifferentElementsPage implements Constants {
 
             super(driver);
         }
-        public List<WebElement> getColorsSelect() {
+        public List<WebElement> getElements() {
 
             Select select = new Select(colorsSelect.findElement(By.tagName("select")));
             return select.getOptions();
         }
-        public void selectColor(String colorName) {
+        public void selectElement(String colorName) {
 
             Select select = new Select(colorsSelect.findElement(By.tagName("select")));
             colorsSelect.click();
             select.selectByVisibleText(colorName);
         }
-        public boolean isColorSelected(String colorName) {
+        public boolean isElementSelected(String colorName) {
 
             if (colorsSelect.getText().equals(colorName)) {
                 return true;
