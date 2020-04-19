@@ -1,7 +1,6 @@
 package hw3.site;
 
 import hw3.Constants;
-import hw3.PageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,19 +12,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class IndexPage extends PageObject implements Constants {
+public class IndexPage implements Constants {
 
     protected WebDriverWait wait;
 
     public IndexPage(WebDriver driver) {
 
-        super(driver);
         wait = new WebDriverWait(driver, WAIT_TIMEOUT);
-    }
-
-    public void open() {
-
-        driver.get(TEST_SITE_URL);
     }
 
     public void login(String userName, String password) {

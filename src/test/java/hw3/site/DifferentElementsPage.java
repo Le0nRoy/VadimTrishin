@@ -1,7 +1,6 @@
 package hw3.site;
 
 import hw3.Constants;
-import hw3.PageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,20 +9,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.NoSuchElementException;
 
-import static org.testng.Assert.assertTrue;
-
-public class DifferentElementsPage extends PageObject implements Constants {
+public class DifferentElementsPage implements Constants {
 
     protected WebDriverWait wait;
 
     public DifferentElementsPage(WebDriver driver) {
 
-        super(driver);
         wait = new WebDriverWait(driver, WAIT_TIMEOUT);
     }
 

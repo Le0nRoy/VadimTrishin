@@ -46,6 +46,7 @@ public class BaseTestClass implements Constants {
     protected void openSiteByURLAndCheckItsTitleTest() {
 
         indexPage.open();
+        chromeDriver.get(TEST_SITE_URL);
 
         String ret = chromeDriver.getTitle();
         String expected = "Home Page";
