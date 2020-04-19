@@ -26,6 +26,10 @@ public class Exercise2 extends BaseTestClass {
         // Task 5
         DifferentElementsPage page = PageFactory.initElements(chromeDriver, DifferentElementsPage.class);
         page.open();
+        DifferentElementsPage.CheckboxesObject checkboxObject = page.getCheckboxesObject();
+        DifferentElementsPage.RadioButtonsObject radioButtonsObject = page.getRadioButtonsObject();
+        DifferentElementsPage.ColorsSelectObject colorsSelectObject = page.getColorsSelectObject();
+        DifferentElementsPage.InfoPanelObject infoPanelObject = page.getInfoPanelObject();
 
         // Task 6
         ArrayList<String> expectedOptionsCheckboxes = new ArrayList<String>(Arrays.asList(
@@ -33,7 +37,7 @@ public class Exercise2 extends BaseTestClass {
                 "Wind"
         ));
         for (String option : expectedOptionsCheckboxes) {
-            page.clickCheckbox(option);
+            checkboxObject.clickCheckbox(option);
         }
 
         // Task 7
@@ -41,7 +45,7 @@ public class Exercise2 extends BaseTestClass {
                 "Selen"
         ));
         for (String option : expectedOptionsRadioButtons) {
-            page.selectRadioButton(option);
+            radioButtonsObject.selectRadioButton(option);
         }
 
         // Task 8
@@ -49,21 +53,21 @@ public class Exercise2 extends BaseTestClass {
                 "Yellow"
         ));
         for (String option : expectedOptionsSelectables) {
-            page.selectColor(option);
+            colorsSelectObject.selectColor(option);
         }
 
         // Task 9
         for (String expectedOption : expectedOptionsCheckboxes) {
-            softAssert.assertTrue(page.findStringInInfoPanelByTwoPatterns(expectedOption, "condition changed to true"));
-            softAssert.assertTrue(page.isCheckboxSelected(expectedOption));
+            softAssert.assertTrue(infoPanelObject.findStringInInfoPanelByTwoPatterns(expectedOption, "condition changed to true"));
+            softAssert.assertTrue(checkboxObject.isCheckboxSelected(expectedOption));
         }
         for (String expectedOption : expectedOptionsRadioButtons) {
-            softAssert.assertTrue(page.findStringInInfoPanelByTwoPatterns(expectedOption, "metal"));
-            softAssert.assertTrue(page.isCheckboxSelected(expectedOption));
+            softAssert.assertTrue(infoPanelObject.findStringInInfoPanelByTwoPatterns(expectedOption, "metal"));
+            softAssert.assertTrue(radioButtonsObject.isRadioButtonSelected(expectedOption));
         }
         for (String expectedOption : expectedOptionsSelectables) {
-            softAssert.assertTrue(page.findStringInInfoPanelByTwoPatterns(expectedOption, "Colors"));
-            softAssert.assertTrue(page.isCheckboxSelected(expectedOption));
+            softAssert.assertTrue(infoPanelObject.findStringInInfoPanelByTwoPatterns(expectedOption, "Colors"));
+            softAssert.assertTrue(colorsSelectObject.isColorSelected(expectedOption));
         }
     }
 
