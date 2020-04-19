@@ -54,13 +54,16 @@ public class Exercise2 extends BaseTestClass {
 
         // Task 9
         for (String expectedOption : expectedOptionsCheckboxes) {
-            assertTrue(page.findStringInInfoPanelByTwoPatterns(expectedOption, "condition changed to true"));
+            softAssert.assertTrue(page.findStringInInfoPanelByTwoPatterns(expectedOption, "condition changed to true"));
+            softAssert.assertTrue(page.isCheckboxSelected(expectedOption));
         }
         for (String expectedOption : expectedOptionsRadioButtons) {
-            assertTrue(page.findStringInInfoPanelByTwoPatterns(expectedOption, "metal"));
+            softAssert.assertTrue(page.findStringInInfoPanelByTwoPatterns(expectedOption, "metal"));
+            softAssert.assertTrue(page.isCheckboxSelected(expectedOption));
         }
         for (String expectedOption : expectedOptionsSelectables) {
-            assertTrue(page.findStringInInfoPanelByTwoPatterns(expectedOption, "Colors"));
+            softAssert.assertTrue(page.findStringInInfoPanelByTwoPatterns(expectedOption, "Colors"));
+            softAssert.assertTrue(page.isCheckboxSelected(expectedOption));
         }
     }
 

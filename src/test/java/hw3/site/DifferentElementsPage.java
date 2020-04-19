@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.testng.Assert.assertTrue;
 
@@ -50,6 +51,16 @@ public class DifferentElementsPage extends PageObject implements Constants {
             }
         }
     }
+    public boolean isCheckboxSelected(String checkboxName) {
+
+        for (Iterator<WebElement> iterator = checkboxes.iterator(); iterator.hasNext(); ) {
+            WebElement el = iterator.next();
+            if (el.getText().equals(checkboxName)) {
+                return el.isSelected();
+            }
+        }
+        return false;
+    }
 
     @FindBy(className = "label-radio")
     List<WebElement> radioButtons;
@@ -67,18 +78,36 @@ public class DifferentElementsPage extends PageObject implements Constants {
             }
         }
     }
+    public boolean isRadioButtonSelected(String radioButtonName) {
+
+        for (Iterator<WebElement> iterator = radioButtons.iterator(); iterator.hasNext(); ) {
+            WebElement el = iterator.next();
+            if (el.getText().equals(radioButtonName)) {
+                return el.isSelected();
+            }
+        }
+        return false;
+    }
 
     @FindBy(xpath = "//*[@class='colors']")
     WebElement colorsSelect;
-//    public List<WebElement> getColorsSelect() {
-//
-//        return select.getOptions();
-//    }
+    public List<WebElement> getColorsSelect() {
+
+        Select select = new Select(colorsSelect.findElement(By.tagName("select")));
+        return select.getOptions();
+    }
     public void selectColor(String colorName) {
 
         Select select = new Select(colorsSelect.findElement(By.tagName("select")));
         colorsSelect.click();
         select.selectByVisibleText(colorName);
+    }
+    public boolean isColorSelected(String colorName) {
+
+        if(colorsSelect.getText().equals(colorName)) {
+            return true;
+        }
+        return false;
     }
 
     @FindBy(xpath = "//*[@class='info-panel-section']//li")
