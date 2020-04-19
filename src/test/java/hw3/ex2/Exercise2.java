@@ -1,8 +1,10 @@
 package hw3.ex2;
 
 import hw3.BaseTestClass;
+import hw3.site.DifferentElementsPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Parameters;
@@ -17,7 +19,7 @@ import static org.testng.Assert.assertTrue;
 
 public class Exercise2 extends BaseTestClass {
 
-    @Test(enabled = false)
+    @Test
     @Parameters({"userName", "password"})
     private void exerciseTest(String userName, String password) {
 
@@ -27,12 +29,9 @@ public class Exercise2 extends BaseTestClass {
         // Tasks 3 - 4
         loginAndCheckUsername(userName, password);
 
-        // FIXME refactor to PageObject
         // Task 5
-        wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//*[contains(text(),'Service')]"))).click();
-        wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//../*[contains(text(),'Different elements')]"))).click();
+        DifferentElementsPage page = PageFactory.initElements(chromeDriver, DifferentElementsPage.class);
+        page.open();
 
         // FIXME refactor to PageComponents
         // Task 6
