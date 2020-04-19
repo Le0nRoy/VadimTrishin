@@ -10,8 +10,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import static org.testng.Assert.assertTrue;
 
 public class DifferentElementsPage extends PageObject implements Constants {
 
@@ -84,5 +87,14 @@ public class DifferentElementsPage extends PageObject implements Constants {
 
         return infoPanel;
     }
+    public boolean findStringInInfoPanelByTwoPatterns(String pattern1, String pattern2) {
 
+        for (Iterator<WebElement> iterator = infoPanel.iterator(); iterator.hasNext(); ) {
+            WebElement el = iterator.next();
+            if (el.getText().contains(pattern1) && el.getText().contains(pattern2)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -2,18 +2,12 @@ package hw3.ex2;
 
 import hw3.BaseTestClass;
 import hw3.site.DifferentElementsPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
 
 import static org.testng.Assert.assertTrue;
 
@@ -47,7 +41,7 @@ public class Exercise2 extends BaseTestClass {
                 "Selen"
         ));
         for (String option : expectedOptionsRadioButtons) {
-                page.selectRadioButton(option);
+            page.selectRadioButton(option);
         }
 
         // Task 8
@@ -58,28 +52,15 @@ public class Exercise2 extends BaseTestClass {
             page.selectColor(option);
         }
 
-        // Fixme Refactor to PageComponents
         // Task 9
-        List<WebElement> elements = chromeDriver.findElements(By.xpath("//*[@class='info-panel-section']//li"));
-
-        for (Iterator<WebElement> iterator = elements.iterator(); iterator.hasNext(); ) {
-            WebElement el = iterator.next();
-            for (String expectedOption : expectedOptionsCheckboxes) {
-                if (el.getText().contains(expectedOption)) {
-                    assertTrue(el.getText().contains("condition changed to true"));
-                }
-            }
-            if (el.getText().contains("metal")) {
-                for (String expectedOption : expectedOptionsRadioButtons) {
-                    assertTrue(el.getText().contains("value changed to " + expectedOption));
-                }
-            }
-
-            if (el.getText().contains("colors")) {
-                for (String expectedOption : expectedOptionsSelectables) {
-                    assertTrue(el.getText().contains("value changed to " + expectedOption));
-                }
-            }
+        for (String expectedOption : expectedOptionsCheckboxes) {
+            assertTrue(page.findStringInInfoPanelByTwoPatterns(expectedOption, "condition changed to true"));
+        }
+        for (String expectedOption : expectedOptionsRadioButtons) {
+            assertTrue(page.findStringInInfoPanelByTwoPatterns(expectedOption, "metal"));
+        }
+        for (String expectedOption : expectedOptionsSelectables) {
+            assertTrue(page.findStringInInfoPanelByTwoPatterns(expectedOption, "Colors"));
         }
     }
 
