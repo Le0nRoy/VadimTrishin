@@ -33,75 +33,54 @@ public class Exercise2 extends BaseTestClass {
         DifferentElementsPage page = PageFactory.initElements(chromeDriver, DifferentElementsPage.class);
         page.open();
 
-        // FIXME refactor to PageComponents
         // Task 6
-        List<WebElement> elements = chromeDriver.findElements(By.className("label-checkbox"));
         ArrayList<String> expectedOptionsCheckboxes = new ArrayList<String>(Arrays.asList(
                 "Water",
                 "Wind"
         ));
-
-        for (Iterator<WebElement> iterator = elements.iterator(); iterator.hasNext(); ) {
-            WebElement el = iterator.next();
-            for ( String option : expectedOptionsCheckboxes ) {
-                if ( el.getText().equals(option)) {
-                    el.click();
-                }
-            }
+        for (String option : expectedOptionsCheckboxes) {
+            page.clickCheckbox(option);
         }
 
-        // FIXME refactor to PageComponents
         // Task 7
-        elements = chromeDriver.findElements(By.className("label-radio"));
         ArrayList<String> expectedOptionsRadioButtons = new ArrayList<String>(Arrays.asList(
                 "Selen"
         ));
-
-        for (Iterator<WebElement> iterator = elements.iterator(); iterator.hasNext(); ) {
-            WebElement el = iterator.next();
-            for ( String option : expectedOptionsRadioButtons ) {
-                if ( el.getText().equals(option)) {
-                    el.click();
-                }
-            }
+        for (String option : expectedOptionsRadioButtons) {
+                page.selectRadioButton(option);
         }
 
-        // FIXME refactor to PageComponents
         // Task 8
-        WebElement element = chromeDriver.findElement(By.xpath("//*[@class='colors']"));
-        element.click();
-        Select select = new Select(element.findElement(
-                By.tagName("select")));
         ArrayList<String> expectedOptionsSelectables = new ArrayList<String>(Arrays.asList(
                 "Yellow"
         ));
-
-        for (String option : expectedOptionsSelectables ) {
-            select.selectByVisibleText(option);
+        for (String option : expectedOptionsSelectables) {
+            page.selectColor(option);
         }
 
         // Fixme Refactor to PageComponents
         // Task 9
-        elements = chromeDriver.findElements(By.xpath("//*[@class='info-panel-section']//li"));
+        List<WebElement> elements = chromeDriver.findElements(By.xpath("//*[@class='info-panel-section']//li"));
 
         for (Iterator<WebElement> iterator = elements.iterator(); iterator.hasNext(); ) {
             WebElement el = iterator.next();
-            for (String expectedOption : expectedOptionsCheckboxes ) {
+            for (String expectedOption : expectedOptionsCheckboxes) {
                 if (el.getText().contains(expectedOption)) {
                     assertTrue(el.getText().contains("condition changed to true"));
                 }
             }
             if (el.getText().contains("metal")) {
-                for (String expectedOption : expectedOptionsRadioButtons ) {
+                for (String expectedOption : expectedOptionsRadioButtons) {
                     assertTrue(el.getText().contains("value changed to " + expectedOption));
                 }
             }
 
             if (el.getText().contains("colors")) {
-                for (String expectedOption : expectedOptionsSelectables ) {
+                for (String expectedOption : expectedOptionsSelectables) {
                     assertTrue(el.getText().contains("value changed to " + expectedOption));
                 }
             }
         }
     }
+
 }
