@@ -23,8 +23,9 @@ public class Exercise1 extends BaseTestClass {
         // Tasks 3 - 4
         loginAndCheckUsername(userName, password);
 
+        // FIXME PageComponent
         // Task 5
-        List<WebElement> elements = indexPage.getnavigationHeaderItems();
+        List<WebElement> elements = indexPage.getNavigationHeaderObject().getnavigationHeaderItems();
         int expectedNumOfElements = 4;
         List<String> expectedNames = new ArrayList<String>(Arrays.asList(
                 "Home",
@@ -35,22 +36,26 @@ public class Exercise1 extends BaseTestClass {
         softAssert.assertEquals(elements.size(), expectedNumOfElements);
         softAssert.assertNotSame(elements, expectedNames);
 
+        // FIXME PageComponent
         // Task 6
-        elements = indexPage.getbenefitIcons();
+        elements = indexPage.getBenefitIconsObject().getbenefitIcons();
         int expectedNumOfImages = 4;
         softAssert.assertEquals(elements.size(), expectedNumOfImages);
 
+        // FIXME PageComponent
         // Task 7
-        elements = indexPage.getBenefitTexts();
+        elements = indexPage.getBenefitTextsObject().getBenefitTexts();
         int expectedNumOfTextsUnderImages = 4;
         softAssert.assertEquals(elements.size(), expectedNumOfTextsUnderImages);
 
+        // FIXME PageComponent
         // Task 8
-        WebElement frameButton = indexPage.getFrameButton();
+        WebElement frameButton = indexPage.getFrameButtonObject().getFrameButton();
         String result = frameButton.getAttribute("src");
         String expected = "https://jdi-testing.github.io/jdi-light/frame-button.html";
         softAssert.assertEquals(result, expected);
 
+        // FIXME PageComponent
         // Task 9
         chromeDriver.get(chromeDriver.findElement(
                 By.xpath("//*[@id='frame']")).getAttribute("src"));
@@ -63,8 +68,9 @@ public class Exercise1 extends BaseTestClass {
         // Task 10
         openSiteByURLAndCheckItsTitleTest();
 
+        // FIXME PageComponent
         // Task 11
-        elements = indexPage.getLeftMenuItems();
+        elements = indexPage.getLeftMenuObject().getLeftMenuItems();
         expectedNumOfElements = 5;
         expectedNames = new ArrayList<String>(Arrays.asList(
                 "Home",
