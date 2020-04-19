@@ -61,7 +61,6 @@ public class Exercise1 extends BaseTestClass {
         softAssert.assertEquals(result, expected);
 
         // Task 10
-        indexPage.open();
         openSiteByURLAndCheckItsTitleTest();
 
         // Task 11
