@@ -52,5 +52,7 @@ public class Exercise2 extends BaseTestClass {
             softAssert.assertEquals(results.get(i), resultsPattern.get(i));
             ++i;
         }
+
+        softAssert.assertAll();
     }
 }

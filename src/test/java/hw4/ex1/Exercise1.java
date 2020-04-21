@@ -55,5 +55,7 @@ public class Exercise1 extends BaseTestClass {
         for (WebElement el : tableRows) {
             softAssert.assertTrue(el.getText().toLowerCase().contains(searchText));
         }
+
+        softAssert.assertAll();
     }
 }
