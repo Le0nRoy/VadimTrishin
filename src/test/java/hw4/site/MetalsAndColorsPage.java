@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
 import java.util.List;
 
 final public class MetalsAndColorsPage implements Constants {
@@ -21,6 +22,7 @@ final public class MetalsAndColorsPage implements Constants {
     private MetalsObject metalsObject;
     private VegetablesObject vegetablesObject;
     private SubmitButton submitButton;
+    private ResultSection resultSection;
 
     public MetalsAndColorsPage(WebDriver driver) {
 
@@ -31,6 +33,7 @@ final public class MetalsAndColorsPage implements Constants {
         metalsObject = new MetalsObject(driver);
         vegetablesObject = new VegetablesObject(driver);
         submitButton = new SubmitButton(driver);
+        resultSection = new ResultSection(driver);
     }
 
     public SummaryObject getSummaryObject() {
@@ -56,6 +59,10 @@ final public class MetalsAndColorsPage implements Constants {
     public SubmitButton getSubmitButton() {
 
         return submitButton;
+    }
+    public ResultSection getResultSection() {
+
+        return resultSection;
     }
 
     public class ClickableObject extends PageComponent {
@@ -151,6 +158,26 @@ final public class MetalsAndColorsPage implements Constants {
         public void clickButton() {
 
             button.click();
+        }
+    }
+
+    final public class ResultSection extends PageComponent {
+
+        @FindBy(css = ".results li")
+        List<WebElement> results;
+
+        protected ResultSection(WebDriver driver) {
+
+            super(driver);
+        }
+
+        public List<String> getTextFromSection() {
+
+            List<String> ret = new ArrayList<String>();
+            for (WebElement el : results) {
+                ret.add(el.getText());
+            }
+            return ret;
         }
     }
 }

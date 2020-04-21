@@ -5,6 +5,12 @@ import hw4.site.MetalsAndColorsPage;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.testng.Assert.assertEquals;
+
 public class Exercise2 extends BaseTestClass {
 
     @Test
@@ -32,5 +38,19 @@ public class Exercise2 extends BaseTestClass {
         // Task 5
         metalsAndColorsPage.getSubmitButton().clickButton();
 
+        // Task 6
+        List<String> results = metalsAndColorsPage.getResultSection().getTextFromSection();
+        List<String> resultsPattern = Arrays.asList(
+                "Summary: ",
+                "Elements: ",
+                "Color: ",
+                "Metal: ",
+                "Vegetables: "
+        );
+        assertEquals(results.size(), resultsPattern.size());
+        for (int i = 0; i < resultsPattern.size(); ) {
+            softAssert.assertEquals(results.get(i), resultsPattern.get(i));
+            ++i;
+        }
     }
 }
