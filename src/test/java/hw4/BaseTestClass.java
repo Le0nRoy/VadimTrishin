@@ -1,6 +1,8 @@
 package hw4;
 
 import hw4.site.IndexPage;
+import hw4.site.LeftMenuObject;
+import hw4.site.NavigationHeaderObject;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -21,6 +23,8 @@ public class BaseTestClass implements Constants {
     protected SoftAssert softAssert;
 
     protected IndexPage indexPage;
+    protected NavigationHeaderObject navigationHeaderObject;
+    protected LeftMenuObject leftMenuObject;
 
     @BeforeTest
     protected void beforeTestMethod() {

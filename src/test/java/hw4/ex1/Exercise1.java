@@ -15,5 +15,8 @@ public class Exercise1 extends BaseTestClass {
 
         // Tasks 3 - 4
         loginAndCheckUsername(userName, password);
+
+        // Task 7
+        navigationHeaderObject.clickHeaderItem("");
     }
 }

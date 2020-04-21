@@ -14,8 +14,6 @@ import java.util.List;
 public class IndexPage implements Constants {
 
     protected WebDriverWait wait;
-    private NavigationHeaderObject navigationHeaderObject;
-    private LeftMenuObject leftMenuObject;
     private BenefitIconsObject benefitIconsObject;
     private BenefitTextsObject benefitTextsObject;
     private FrameButtonObject frameButtonObject;
@@ -23,21 +21,11 @@ public class IndexPage implements Constants {
     public IndexPage(WebDriver driver) {
 
         wait = new WebDriverWait(driver, WAIT_TIMEOUT);
-        navigationHeaderObject = new NavigationHeaderObject(driver);
-        leftMenuObject = new LeftMenuObject(driver);
         benefitIconsObject = new BenefitIconsObject(driver);
         benefitTextsObject = new BenefitTextsObject(driver);
         frameButtonObject = new FrameButtonObject(driver);
     }
 
-    public NavigationHeaderObject getNavigationHeaderObject() {
-
-        return navigationHeaderObject;
-    }
-    public LeftMenuObject getLeftMenuObject() {
-
-        return leftMenuObject;
-    }
     public BenefitIconsObject getBenefitIconsObject() {
 
         return benefitIconsObject;
