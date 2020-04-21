@@ -5,6 +5,7 @@ import hw4.PageComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -19,6 +20,7 @@ final public class MetalsAndColorsPage implements Constants {
     private ColorsObject colorsObject;
     private MetalsObject metalsObject;
     private VegetablesObject vegetablesObject;
+    private SubmitButton submitButton;
 
     public MetalsAndColorsPage(WebDriver driver) {
 
@@ -28,6 +30,7 @@ final public class MetalsAndColorsPage implements Constants {
         colorsObject = new ColorsObject(driver);
         metalsObject = new MetalsObject(driver);
         vegetablesObject = new VegetablesObject(driver);
+        submitButton = new SubmitButton(driver);
     }
 
     public SummaryObject getSummaryObject() {
@@ -50,6 +53,10 @@ final public class MetalsAndColorsPage implements Constants {
 
         return vegetablesObject;
     }
+    public SubmitButton getSubmitButton() {
+
+        return submitButton;
+    }
 
     public class ClickableObject extends PageComponent {
 
@@ -69,24 +76,6 @@ final public class MetalsAndColorsPage implements Constants {
         }
     }
 
-    public class SelectableObject extends PageComponent {
-
-        WebElement element;
-
-        protected SelectableObject(WebDriver driver) {
-
-            super(driver);
-        }
-
-        public void selectByValue(String value) {
-
-            element.click();
-
-            Select select = new Select(element.findElement(By.cssSelector("select")));
-            select.selectByValue(value);
-        }
-    }
-
     final public class SummaryObject extends ClickableObject {
 
         protected SummaryObject(WebDriver driver) {
@@ -102,6 +91,24 @@ final public class MetalsAndColorsPage implements Constants {
 
             super(driver);
             elements = driver.findElements(By.cssSelector("#elements-block .checkbox"));
+        }
+    }
+
+    public class SelectableObject extends PageComponent {
+
+        WebElement element;
+
+        protected SelectableObject(WebDriver driver) {
+
+            super(driver);
+        }
+
+        public void selectByValue(String value) {
+
+            element.click();
+
+            Select select = new Select(element.findElement(By.cssSelector("select")));
+            select.selectByValue(value);
         }
     }
 
@@ -129,6 +136,21 @@ final public class MetalsAndColorsPage implements Constants {
 
             super(driver);
             element = driver.findElement(By.cssSelector("#vegetables"));
+        }
+    }
+
+    final public class SubmitButton extends PageComponent {
+
+        @FindBy(css = "#submit-button")
+        WebElement button;
+        protected SubmitButton(WebDriver driver) {
+
+            super(driver);
+        }
+
+        public void clickButton() {
+
+            button.click();
         }
     }
 }

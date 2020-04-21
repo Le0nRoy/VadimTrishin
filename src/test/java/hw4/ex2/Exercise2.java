@@ -29,5 +29,8 @@ public class Exercise2 extends BaseTestClass {
 //        metalsAndColorsPage.getMetalsObject().selectByValue("Selen");
 //        metalsAndColorsPage.getVegetablesObject().selectByValue("Onion");
 
+        // Task 5
+        metalsAndColorsPage.getSubmitButton().clickButton();
+
     }
 }
