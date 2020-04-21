@@ -15,7 +15,7 @@ public class NavigationHeaderObject extends PageComponent {
 
         super(driver);
     }
-    public List<WebElement> getnavigationHeaderItems() {
+    public List<WebElement> getNavigationHeaderItems() {
 
         return navigationHeaderItems;
     }
@@ -24,9 +24,8 @@ public class NavigationHeaderObject extends PageComponent {
         for (WebElement el : navigationHeaderItems) {
             if (headerItem.equals(el.getText())) {
                 el.click();
-                break;
+                return;
             }
         }
     }
-
 }

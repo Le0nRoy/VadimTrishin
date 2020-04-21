@@ -36,6 +36,8 @@ public class BaseTestClass implements Constants {
         wait = new WebDriverWait(chromeDriver, WAIT_TIMEOUT);
 
         indexPage = PageFactory.initElements(chromeDriver, IndexPage.class);
+        navigationHeaderObject = PageFactory.initElements(chromeDriver, NavigationHeaderObject.class);
+        leftMenuObject = PageFactory.initElements(chromeDriver, LeftMenuObject.class);
     }
 
     @AfterTest
