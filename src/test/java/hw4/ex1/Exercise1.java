@@ -24,9 +24,16 @@ public class Exercise1 extends BaseTestClass {
 
         // Task 8
         TableWithPagesPage.ShowEntriesSelectObject showEntriesSelectObject = tableWithPagesPage.getShowEntriesSelectObject();
-        String defaultNamOfEntries = showEntriesSelectObject.getCurrentState();
+        String defaultNumOfEntries = showEntriesSelectObject.getCurrentState();
         // FIXME deal with quotes and check ints
-        String expected = "\"5";
-        softAssert.assertEquals(defaultNamOfEntries, expected);
+        String expectedString = "\"5";
+        softAssert.assertEquals(defaultNumOfEntries, expectedString);
+
+        // Task 11
+        int expectedInt = 10;
+        showEntriesSelectObject.selectValue(Integer.toString(expectedInt));
+        String currentNumOfEntries = showEntriesSelectObject.getCurrentState();
+        expectedString = "\"" + expectedInt;
+        softAssert.assertEquals(currentNumOfEntries, expectedString);
     }
 }
