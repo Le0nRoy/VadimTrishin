@@ -10,15 +10,19 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class TableWithPagesPage implements Constants {
 
     protected WebDriverWait wait;
     protected ShowEntriesSelectObject showEntriesSelectObject;
+    protected TableWithPagesObject tableWithPagesObject;
 
     public TableWithPagesPage(WebDriver driver) {
 
         wait = new WebDriverWait(driver, WAIT_TIMEOUT);
         showEntriesSelectObject = new ShowEntriesSelectObject(driver);
+        tableWithPagesObject = new TableWithPagesObject(driver);
     }
 
     public void open() {
@@ -30,7 +34,12 @@ public class TableWithPagesPage implements Constants {
     }
 
     public ShowEntriesSelectObject getShowEntriesSelectObject() {
+
         return showEntriesSelectObject;
+    }
+    public TableWithPagesObject getTableWithPagesObject() {
+
+        return tableWithPagesObject;
     }
 
     public class ShowEntriesSelectObject extends PageComponent {
@@ -51,6 +60,21 @@ public class TableWithPagesPage implements Constants {
 
             Select select = new Select(showEntriesSelect);
             select.selectByValue(value);
+        }
+    }
+
+    public class TableWithPagesObject extends PageComponent {
+
+        @FindBy(css = "#table-with-pages")
+        WebElement table;
+        protected TableWithPagesObject(WebDriver driver) {
+
+            super(driver);
+        }
+
+        public List<WebElement> getTableRows() {
+
+            return table.findElements(By.cssSelector("tbody > tr"));
         }
     }
 }
