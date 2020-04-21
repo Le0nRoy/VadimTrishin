@@ -18,7 +18,16 @@ public class Exercise2 extends BaseTestClass {
         loginAndCheckUsername(userName, password);
 
         // Task 3
+        navigationHeaderObject.clickHeaderItem("Metals & Colors");
         MetalsAndColorsPage metalsAndColorsPage = new MetalsAndColorsPage(chromeDriver);
-        metalsAndColorsPage.open();
+
+        // Task 4
+        metalsAndColorsPage.getSummaryObject().clickElement("5");
+        metalsAndColorsPage.getSummaryObject().clickElement("6");
+        metalsAndColorsPage.getElementsObject().clickElement("Water");
+//        metalsAndColorsPage.getColorsObject().selectByValue("Yellow");
+//        metalsAndColorsPage.getMetalsObject().selectByValue("Selen");
+//        metalsAndColorsPage.getVegetablesObject().selectByValue("Onion");
+
     }
 }
