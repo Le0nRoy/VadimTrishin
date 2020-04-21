@@ -17,12 +17,13 @@ public class TableWithPagesPage implements Constants {
     protected WebDriverWait wait;
     protected ShowEntriesSelectObject showEntriesSelectObject;
     protected TableWithPagesObject tableWithPagesObject;
-
+    protected TableFilterObject tableFilterObject;
     public TableWithPagesPage(WebDriver driver) {
 
         wait = new WebDriverWait(driver, WAIT_TIMEOUT);
         showEntriesSelectObject = new ShowEntriesSelectObject(driver);
         tableWithPagesObject = new TableWithPagesObject(driver);
+        tableFilterObject = new TableFilterObject(driver);
     }
 
     public void open() {
@@ -40,6 +41,10 @@ public class TableWithPagesPage implements Constants {
     public TableWithPagesObject getTableWithPagesObject() {
 
         return tableWithPagesObject;
+    }
+    public TableFilterObject getTableFilterObject() {
+
+        return tableFilterObject;
     }
 
     public class ShowEntriesSelectObject extends PageComponent {
@@ -76,5 +81,22 @@ public class TableWithPagesPage implements Constants {
 
             return table.findElements(By.cssSelector("tbody > tr"));
         }
+    }
+
+    public class TableFilterObject extends PageComponent {
+
+        @FindBy(css = "#table-with-pages_filter input")
+        WebElement search;
+
+        protected TableFilterObject(WebDriver driver) {
+
+            super(driver);
+        }
+
+        public void searchByText(String text) {
+
+            search.sendKeys(text);
+        }
+
     }
 }

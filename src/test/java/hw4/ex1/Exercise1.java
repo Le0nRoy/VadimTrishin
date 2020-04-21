@@ -45,5 +45,15 @@ public class Exercise1 extends BaseTestClass {
         int numOfRows = tableRows.size();
         expectedInt = 10;
         softAssert.assertEquals(numOfRows, expectedInt);
+
+        //Tasks 14 - 15
+        TableWithPagesPage.TableFilterObject tableFilterObject = tableWithPagesPage.getTableFilterObject();
+        String searchText = "junit";
+        tableFilterObject.searchByText(searchText);
+
+        tableRows = tableWithPagesObject.getTableRows();
+        for (WebElement el : tableRows) {
+            softAssert.assertTrue(el.getText().toLowerCase().contains(searchText));
+        }
     }
 }
