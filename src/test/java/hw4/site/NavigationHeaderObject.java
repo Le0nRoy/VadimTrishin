@@ -22,7 +22,7 @@ public class NavigationHeaderObject extends PageComponent {
     public void clickHeaderItem(final String headerItem) {
 
         for (WebElement el : navigationHeaderItems) {
-            if (headerItem.equals(el.getText())) {
+            if (headerItem.toLowerCase().equals(el.getText().toLowerCase())) {
                 el.click();
                 return;
             }
