@@ -59,7 +59,8 @@ public class TableWithPagesPage implements Constants {
 
         public String getCurrentState() {
 
-            return showEntriesSelect.getText();
+            Select select = new Select(showEntriesSelect);
+            return select.getFirstSelectedOption().getText();
         }
         public void selectValue(String value) {
 

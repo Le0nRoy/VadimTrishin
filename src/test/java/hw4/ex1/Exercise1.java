@@ -29,22 +29,21 @@ public class Exercise1 extends BaseTestClass {
         TableWithPagesPage.ShowEntriesSelectObject showEntriesSelectObject = tableWithPagesPage.getShowEntriesSelectObject();
         String defaultNumOfEntries = showEntriesSelectObject.getCurrentState();
         // FIXME deal with quotes and check ints
-        String expectedString = "\"5";
-        softAssert.assertEquals(defaultNumOfEntries, expectedString);
+        int expected = 5;
+        softAssert.assertEquals(Integer.parseInt(defaultNumOfEntries), expected);
 
         // Task 11
-        int expectedInt = 10;
-        showEntriesSelectObject.selectValue(Integer.toString(expectedInt));
+        expected = 10;
+        showEntriesSelectObject.selectValue(Integer.toString(expected));
         String currentNumOfEntries = showEntriesSelectObject.getCurrentState();
-        expectedString = "\"" + expectedInt;
-        softAssert.assertEquals(currentNumOfEntries, expectedString);
+        softAssert.assertEquals(Integer.parseInt(currentNumOfEntries), expected);
 
         // Task 13
         TableWithPagesPage.TableWithPagesObject tableWithPagesObject = tableWithPagesPage.getTableWithPagesObject();
         List<WebElement> tableRows = tableWithPagesObject.getTableRows();
         int numOfRows = tableRows.size();
-        expectedInt = 10;
-        softAssert.assertEquals(numOfRows, expectedInt);
+        expected = 10;
+        softAssert.assertEquals(numOfRows, expected);
 
         //Tasks 14 - 15
         TableWithPagesPage.TableFilterObject tableFilterObject = tableWithPagesPage.getTableFilterObject();

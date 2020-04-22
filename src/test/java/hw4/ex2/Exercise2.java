@@ -48,9 +48,8 @@ public class Exercise2 extends BaseTestClass {
                 "Vegetables: "
         );
         assertEquals(results.size(), resultsPattern.size());
-        for (int i = 0; i < resultsPattern.size(); ) {
-            softAssert.assertEquals(results.get(i), resultsPattern.get(i));
-            ++i;
+        for (int i = 0; i < resultsPattern.size(); ++i) {
+            softAssert.assertTrue(results.get(i).contains(resultsPattern.get(i)));
         }
 
         softAssert.assertAll();
