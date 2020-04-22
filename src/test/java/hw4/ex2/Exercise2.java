@@ -3,11 +3,8 @@ package hw4.ex2;
 import hw4.BaseTestClass;
 import hw4.site.MetalsAndColorsPage;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,7 +15,7 @@ public class Exercise2 extends BaseTestClass {
     @DataProvider
     public Object[][] metalsAndColorsDataProvider() {
 
-        return new Object[][] {
+        return new Object[][]{
                 {MetalsAndColorsTestData.builder().setSummaryOdd(1).setSummaryEven(2)
                         .setElements(Arrays.asList("Earth")).setColor("Yellow").setMetal("Selen")
                         .setVegetables(Arrays.asList("Onion")).build()}
@@ -51,6 +48,8 @@ public class Exercise2 extends BaseTestClass {
         }
 
         MetalsAndColorsPage.VegetablesObject vegetablesObject = metalsAndColorsPage.getVegetablesObject();
+        // Deselect default value
+        vegetablesObject.selectByValue("Vegetables");
         List<String> vegetables = testData.getVegetables();
         for (String veg : vegetables) {
             vegetablesObject.selectByValue(veg);
@@ -71,12 +70,34 @@ public class Exercise2 extends BaseTestClass {
         assertEquals(results.size(), resultsPattern.size());
         for (int i = 0; i < resultsPattern.size(); ++i) {
             softAssert.assertTrue(results.get(i).contains(resultsPattern.get(i)));
+            results.set(i, results.get(i).split(resultsPattern.get(i))[1]);
+        }
+
+        softAssert.assertEquals(results.get(0),
+                Integer.toString(testData.getSummaryEven() + testData.getSummaryOdd()));
+
+        String[] elementsResult = results.get(1).split(",");
+        elements = testData.getElements();
+        softAssert.assertEquals(elementsResult.length, elements.size());
+        for(int i = 0; i < elements.size(); ++i) {
+            softAssert.assertEquals(elementsResult[i], elements.get(i));
+        }
+
+        softAssert.assertEquals(results.get(2), testData.getColor());
+        softAssert.assertEquals(results.get(3), testData.getMetal());
+
+        String[] vegetablesResult = results.get(4).split(",");
+        vegetables = testData.getVegetables();
+        softAssert.assertEquals(vegetablesResult.length, vegetables.size());
+        for(int i = 0; i < vegetables.size(); ++i) {
+            softAssert.assertEquals(vegetablesResult[i], vegetables.get(i));
         }
 
         softAssert.assertAll();
     }
 
     private static class MetalsAndColorsTestData {
+
         private int summaryOdd;
         private int summaryEven;
         private List<String> elements;
@@ -125,9 +146,11 @@ public class Exercise2 extends BaseTestClass {
 
             return vegetables;
         }
+
     }
 
     private static class MetalsAndColorsBuilder {
+
         private int summaryOdd;
         private int summaryEven;
         private List<String> elements;
@@ -170,7 +193,10 @@ public class Exercise2 extends BaseTestClass {
             return this;
         }
         public MetalsAndColorsTestData build() {
+
             return new MetalsAndColorsTestData(summaryOdd, summaryEven, elements, color, metal, vegetables);
         }
+
     }
+
 }
