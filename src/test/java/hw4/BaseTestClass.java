@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.asserts.SoftAssert;
 
 import static org.testng.Assert.assertEquals;
@@ -26,8 +27,15 @@ public class BaseTestClass implements Constants {
     protected NavigationHeaderObject navigationHeaderObject;
     protected LeftMenuObject leftMenuObject;
 
+    protected String userName;
+    protected String password;
+
     @BeforeTest
-    protected void beforeTestMethod() {
+    @Parameters({"userName", "password"})
+    protected void beforeTestMethod(String userName, String password) {
+
+        this.userName = userName;
+        this.password = password;
 
         WebDriverManager.chromedriver().setup();
         chromeDriver = new ChromeDriver();
