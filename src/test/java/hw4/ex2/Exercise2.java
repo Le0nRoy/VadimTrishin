@@ -31,9 +31,9 @@ public class Exercise2 extends BaseTestClass {
         metalsAndColorsPage.getSummaryObject().clickElement("5");
         metalsAndColorsPage.getSummaryObject().clickElement("6");
         metalsAndColorsPage.getElementsObject().clickElement("Water");
-//        metalsAndColorsPage.getColorsObject().selectByValue("Yellow");
-//        metalsAndColorsPage.getMetalsObject().selectByValue("Selen");
-//        metalsAndColorsPage.getVegetablesObject().selectByValue("Onion");
+        metalsAndColorsPage.getColorsObject().selectByValue("Yellow");
+        metalsAndColorsPage.getMetalsObject().selectByValue("Selen");
+        metalsAndColorsPage.getVegetablesObject().selectByValue("Onion");
 
         // Task 5
         metalsAndColorsPage.getSubmitButton().clickButton();

@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 final public class MetalsAndColorsPage implements Constants {
 
@@ -103,7 +104,8 @@ final public class MetalsAndColorsPage implements Constants {
 
     public class SelectableObject extends PageComponent {
 
-        WebElement element;
+        protected WebElement element;
+        protected List<WebElement> elements;
 
         protected SelectableObject(WebDriver driver) {
 
@@ -112,10 +114,16 @@ final public class MetalsAndColorsPage implements Constants {
 
         public void selectByValue(String value) {
 
-            element.click();
+            element.findElement(By.cssSelector(".caret")).click();
+            if (elements==null) {
+                elements = element.findElements(By.cssSelector("li"));
+            }
 
-            Select select = new Select(element.findElement(By.cssSelector("select")));
-            select.selectByValue(value);
+            for (WebElement el : elements) {
+                if (el.getText().equals(value)) {
+                    el.click();
+                }
+            }
         }
     }
 
