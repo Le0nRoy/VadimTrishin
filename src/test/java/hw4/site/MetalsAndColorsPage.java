@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
@@ -121,6 +122,7 @@ final public class MetalsAndColorsPage implements Constants {
                     el.click();
                 }
             }
+            element.findElement(By.cssSelector(".caret")).click();
         }
     }
 
@@ -162,7 +164,7 @@ final public class MetalsAndColorsPage implements Constants {
 
         public void clickButton() {
 
-            button.click();
+            wait.until(ExpectedConditions.elementToBeClickable(button)).click();
         }
     }
 
