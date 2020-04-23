@@ -122,7 +122,6 @@ final public class MetalsAndColorsPage implements Constants {
                     el.click();
                 }
             }
-            element.findElement(By.cssSelector(".caret")).click();
         }
     }
 
@@ -150,6 +149,12 @@ final public class MetalsAndColorsPage implements Constants {
 
             super(driver);
             element = driver.findElement(By.cssSelector("#vegetables"));
+        }
+
+        @Override
+        public void selectByValue(String value) {
+            super.selectByValue(value);
+            element.findElement(By.cssSelector(".caret")).click();
         }
     }
 
@@ -183,6 +188,17 @@ final public class MetalsAndColorsPage implements Constants {
             List<String> ret = new ArrayList<String>();
             for (WebElement el : results) {
                 ret.add(el.getText());
+            }
+            return ret;
+        }
+
+        public String getTextForNamedSection(String sectionName) {
+
+            String ret = null;
+            for (WebElement el : results) {
+                if (el.getText().contains(sectionName)) {
+                    ret = el.getText();
+                }
             }
             return ret;
         }

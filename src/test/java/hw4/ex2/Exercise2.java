@@ -17,9 +17,6 @@ public class Exercise2 extends BaseTestClass {
     public Object[][] metalsAndColorsDataProvider() {
 
         return new Object[][]{
-//                {MetalsAndColorsTestData.builder().setSummaryOdd(1).setSummaryEven(2)
-//                        .setElements(Arrays.asList("Earth")).setColor("Yellow").setMetal("Selen")
-//                        .setVegetables(Arrays.asList("Onion")).build()},
                 {MetalsAndColorsTestData.builder().setElements(Arrays.asList("Earth")).setColor("Yellow")
                         .setMetal("Gold").build()},
                 {MetalsAndColorsTestData.builder().setSummaryOdd(3).setSummaryEven(8)
@@ -28,7 +25,7 @@ public class Exercise2 extends BaseTestClass {
                         .setElements(Arrays.asList("Wind", "Fire", "Water")).setMetal("Bronze")
                         .setVegetables(Arrays.asList("Onion")).build()},
                 {MetalsAndColorsTestData.builder().setSummaryOdd(5).setSummaryEven(6)
-                        .setElements(Arrays.asList("Watter")).setColor("Green").setMetal("Selen")
+                        .setElements(Arrays.asList("Water")).setColor("Green").setMetal("Selen")
                         .setVegetables(Arrays.asList("Cucumber", "Tomato", "Vegetables", "Onion")).build()},
                 {MetalsAndColorsTestData.builder().setElements(Arrays.asList("Fire")).setColor("Blue")
                         .setVegetables(Arrays.asList("Cucumber", "Tomato", "Vegetables")).build()}
@@ -83,6 +80,12 @@ public class Exercise2 extends BaseTestClass {
         // Task 5
         metalsAndColorsPage.getSubmitButton().clickButton();
 
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         // Task 6
         // Check results by pattern and parse them
         List<String> results = metalsAndColorsPage.getResultSection().getTextFromSection();
@@ -102,34 +105,44 @@ public class Exercise2 extends BaseTestClass {
             results.set(i, results.get(i).split(resultsPattern.get(i))[1]);
         }
 
+        int posSummary = 0;
+        int posElements = 1;
+        int posColor = 2;
+        int posMetal = 3;
+        int posVegetables = 4;
+
         // Check results
         if (testData.getSummaryOdd() != 0) {
-            softAssert.assertEquals(results.get(0),
+            softAssert.assertEquals(results.get(posSummary),
                     Integer.toString(testData.getSummaryEven() + testData.getSummaryOdd()));
         }
 
         if (testData.getElements() != null) {
-            String[] elementsResult = results.get(1).split(", ");
             elements = testData.getElements();
-            softAssert.assertEquals(elementsResult.length, elements.size());
-            for (int i = 0; i < elements.size(); ++i) {
-                softAssert.assertEquals(elementsResult[i], elements.get(i));
+            String elementsResult = results.get(posElements);
+            softAssert.assertEquals(elementsResult.split(", ").length, elements.size());
+            for (String str : elements) {
+                softAssert.assertTrue(elementsResult.contains(str));
             }
+        } else {
+            posColor = 1;
+            posMetal = 2;
+            posVegetables = 3;
         }
 
         if (testData.getColor() != null) {
-            softAssert.assertEquals(results.get(2), testData.getColor());
+            softAssert.assertEquals(results.get(posColor), testData.getColor());
         }
         if (testData.getMetal() != null) {
-            softAssert.assertEquals(results.get(3), testData.getMetal());
+            softAssert.assertEquals(results.get(posMetal), testData.getMetal());
         }
 
         if (testData.getVegetables() != null) {
-            List<String> vegetablesResult = Arrays.asList(results.get(4).split(", "));
             vegetables = testData.getVegetables();
-            softAssert.assertEquals(vegetablesResult.size(), vegetables.size());
-            for (int i = 0; i < vegetables.size(); ++i) {
-                softAssert.assertEquals(vegetablesResult.get(i), vegetables.get(i));
+            String vegetablesResult = results.get(posVegetables);
+            softAssert.assertEquals(vegetablesResult.split(", ").length, vegetables.size());
+            for (String str : vegetables) {
+                softAssert.assertTrue(vegetablesResult.contains(str));
             }
         }
 
