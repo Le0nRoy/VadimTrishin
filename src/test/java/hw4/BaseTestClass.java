@@ -10,9 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
 import static org.testng.Assert.assertEquals;
@@ -30,7 +28,7 @@ public class BaseTestClass implements Constants {
     protected String userName;
     protected String password;
 
-    @BeforeTest
+    @BeforeMethod
     @Parameters({"userName", "password"})
     protected void beforeTestMethod(String userName, String password) {
 
@@ -48,7 +46,7 @@ public class BaseTestClass implements Constants {
         leftMenuObject = PageFactory.initElements(chromeDriver, LeftMenuObject.class);
     }
 
-    @AfterTest
+    @AfterMethod
     protected void closeChrome() {
 
         chromeDriver.close();
