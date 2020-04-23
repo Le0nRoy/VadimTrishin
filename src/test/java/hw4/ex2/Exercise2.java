@@ -80,12 +80,6 @@ public class Exercise2 extends BaseTestClass {
         // Task 5
         metalsAndColorsPage.getSubmitButton().clickButton();
 
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         // Task 6
         // Check results by pattern and parse them
         List<String> results = metalsAndColorsPage.getResultSection().getTextFromSection();

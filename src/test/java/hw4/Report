@@ -1,0 +1,38 @@
+1. Layers implemented:
+    a) Test data:
+        In Exercise2 test data is filled inside method annotated as DataProvider.
+
+    b) Test logic realisations:
+        In both exercises test logic is implemented in one method.
+
+    c) Test launching:
+        Is done by TestNG framework.
+        Tests, that should be launched are implemented in testng.xml file.
+
+    d) Logging
+        Logging is done only to standard output.
+
+    e) Services:
+        Inside test logic realisation chrome browser is opened.
+        Tested site is launched from outside.
+
+    f) Configurations:
+        testng.xml provides login data.
+        URLs are hardcoded.
+
+2. Layers missed:
+    a) Reports
+    b) Logging to files
+    c) No utilities are used
+    d) Configuration (as URL) is not in separate layer
+
+3. Possible solution improvements:
+    a) Logging:
+        Each test could be logged to separate file.
+        For better understanding test data and screenshots could be added to logs.
+    b) Test data:
+        All test data could be implemented in separate files. DataProvider methods should only read and
+        parse this files to avoid recompiling tests after changing or adding test data.
+    c) Configurations:
+        URL of tested service could be implemented in testng.xml file or another separate file to avoid
+        recompiling of tests if site/service migrates to another URL.
