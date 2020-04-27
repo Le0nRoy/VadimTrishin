@@ -19,6 +19,7 @@
         <selenium-java.version>3.141.59</selenium-java.version>
         <webdrivermanager.version>3.8.1</webdrivermanager.version>
         <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
+        <jdi.version>1.2.3</jdi.version>
     </properties>
 
     <!--    Profiles descriptions-->
@@ -88,6 +89,11 @@
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>${webdrivermanager.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light-html</artifactId>
+            <version>${jdi.version}</version>
         </dependency>
     </dependencies>
 
