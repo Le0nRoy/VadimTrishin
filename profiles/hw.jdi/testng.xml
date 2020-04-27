@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Test PageObject Exercise1">
+    <parameter name="userName" value="Roman" />
+    <parameter name="password" value="Jdi1234" />
+
+    <test name="JdiTest">
+        <classes>
+            <class name="hw.jdi.BaseClass" />
+        </classes>
+    </test>
+</suite>

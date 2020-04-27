@@ -25,6 +25,12 @@
     <!--    Profiles descriptions-->
     <profiles>
         <profile>
+            <id>hw-jdi</id>
+            <properties>
+                <build.profile.id>hw.jdi</build.profile.id>
+            </properties>
+        </profile>
+        <profile>
             <id>hw3</id>
             <properties>
                 <build.profile.id>hw3</build.profile.id>
