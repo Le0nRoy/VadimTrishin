@@ -24,6 +24,12 @@
     <!--    Profiles descriptions-->
     <profiles>
         <profile>
+            <id>hw4</id>
+            <properties>
+                <build.profile.id>hw4</build.profile.id>
+            </properties>
+        </profile>
+        <profile>
             <id>hw3</id>
             <properties>
                 <build.profile.id>hw3</build.profile.id>
