@@ -6,11 +6,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import hw.jdi.site.EpamSite;
 import hw.jdi.site.HomePage;
+import hw.jdi.site.MetalsAndColorsPage;
 import hw.jdi.site.User;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -57,12 +55,12 @@ public class BaseClass {
         return returnValue;
     }
 
-    @BeforeMethod(alwaysRun = true)
+    @BeforeMethod
     public void beforeTestMethod() {
 
         initElements(EpamSite.class);
     }
-    @AfterMethod(alwaysRun = true)
+    @AfterMethod
     public void afterTestMethod() {
 
         killAllSeleniumDrivers();
@@ -71,16 +69,22 @@ public class BaseClass {
     @Test(dataProvider = "getFromJsonProvider")
     public void loginOnSiteAndFillFormsTest(MetalsAndColorsTestData testData) {
 
-//        EpamSite.open();
-//
-//        User user = new User("Roman", "Jdi1234", "ROMAN IOVLEV");
-//        EpamSite.getHomePage().login(user);
-//        EpamSite.getHomePage().getLoginForm().getUserName().is().text(user.getFullName());
-//
-//        EpamSite.getHeaderMenu().metalsAndColors.click();
-//        EpamSite.getMetalsAndColorsPage().checkOpened();
+        EpamSite.open();
 
-        System.out.println(testData);
+        User user = new User("Roman", "Jdi1234", "ROMAN IOVLEV");
+        EpamSite.getHomePage().login(user);
+        EpamSite.getHomePage().getLoginForm().getUserName().is().text(user.getFullName());
+
+        EpamSite.getHeaderMenu().metalsAndColors.click();
+        MetalsAndColorsPage metalsAndColorsPage = EpamSite.getMetalsAndColorsPage();
+        metalsAndColorsPage.checkOpened();
+
+        metalsAndColorsPage.builder()
+                .setSummaryValues(testData.getSummary())
+                .setElementsValues(testData.getElements())
+                .setColorsValue(testData.getColor())
+                .setMetalsValue(testData.getMetals())
+                .setVegetablesValue(testData.getVegetables())
+                .submit();
     }
-
 }

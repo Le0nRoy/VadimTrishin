@@ -20,6 +20,7 @@ public class LoginForm extends Form<User> {
     private Button userIcon;
 
     public void login(User user) {
+
         userIcon.click();
         super.login(user);
     }
