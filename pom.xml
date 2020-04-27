@@ -20,6 +20,7 @@
         <webdrivermanager.version>3.8.1</webdrivermanager.version>
         <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
         <jdi.version>1.2.3</jdi.version>
+        <assertj.version>3.15.0</assertj.version>
     </properties>
 
     <!--    Profiles descriptions-->
@@ -102,6 +103,11 @@
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
             <version>${jdi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
         </dependency>
     </dependencies>
 
