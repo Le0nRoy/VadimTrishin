@@ -8,6 +8,7 @@ public class EpamSite {
 
     @Url("/index.html")
     private static HomePage homePage;
+    private static HeaderMenu headerMenu;
     private static MetalsAndColorsPage metalsAndColorsPage;
 
     public static void open() {
@@ -17,6 +18,10 @@ public class EpamSite {
     public static HomePage getHomePage() {
 
         return homePage;
+    }
+    public static HeaderMenu getHeaderMenu() {
+
+        return headerMenu;
     }
     public static MetalsAndColorsPage getMetalsAndColorsPage() {
 

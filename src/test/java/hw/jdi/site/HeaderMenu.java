@@ -1,21 +1,20 @@
 package hw.jdi.site;
 
-import com.epam.jdi.light.elements.complex.Menu;
-import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.TextField;
 
 public class HeaderMenu {
 
     @Css(".navbar-nav")
-    public Menu navigationMenu;
+    public Button navigationMenu;
 
-    public class LoginForm extends Form<User> {
-
-        private TextField login;
-        private TextField password;
-        private Button loginButton;
-    }
-
+    @XPath("//*[@role='navigation']//*[contains(text(),'Home')]")
+    public Button home;
+    @XPath("//*[@role='navigation']//*[contains(text(),'Contact form')]")
+    public Button contactForm;
+    @XPath("//*[@role='navigation']//*[contains(text(),'Service')]")
+    public Button service;
+    @XPath("//*[@role='navigation']//*[contains(text(),'Metals & Colors')]")
+    public Button metalsAndColors;
 }
