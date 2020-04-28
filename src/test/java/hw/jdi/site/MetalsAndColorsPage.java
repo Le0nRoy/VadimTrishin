@@ -29,7 +29,7 @@ public class MetalsAndColorsPage extends WebPage {
     @Css("#submit-button")
     private Button submitButton;
 
-    @Css(".info-panel-body-result")
+    @Css(".info-panel-body-result li")
     private WebList results;
     public WebList getResults() {
 
@@ -107,6 +107,8 @@ public class MetalsAndColorsPage extends WebPage {
             }
 
             vegetables.toggle();
+            // Remove default selected value
+            badSelect("Vegetables", vegetables.finds(By.cssSelector("li")));
             for (String value : values) {
                 badSelect(value, vegetables.finds(By.cssSelector("li")));
             }
