@@ -1,11 +1,10 @@
 package hw.jdi;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 @AllArgsConstructor
 public class MetalsAndColorsTestData {
 
@@ -15,6 +14,39 @@ public class MetalsAndColorsTestData {
     private String metals;
     private List<String> vegetables;
 
+    public List<Integer> getSummary() {
+
+        return summary;
+    }
+    public List<String> getElements() {
+
+        return elements;
+    }
+    public String getColor() {
+
+        return color;
+    }
+    public String getMetals() {
+
+        return metals;
+    }
+    public List<String> getVegetables() {
+
+        return vegetables;
+    }
+    public List<String> getResultsPattern() {
+
+        List<String> resultsPattern = new ArrayList<String>();
+        resultsPattern.add("Summary");
+        if (elements != null) {
+            resultsPattern.add("Elements");
+        }
+        resultsPattern.add("Color");
+        resultsPattern.add("Metal");
+        resultsPattern.add("Vegetables");
+
+        return resultsPattern;
+    }
     @Override
     public String toString() {
 

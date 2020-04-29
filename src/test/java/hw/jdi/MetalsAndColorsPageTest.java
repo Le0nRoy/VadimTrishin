@@ -16,13 +16,14 @@ import org.testng.asserts.SoftAssert;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static org.testng.Assert.assertEquals;
 
-public class BaseClass {
+public class MetalsAndColorsPageTest {
 
     private int numOfDataSets = 5;
 
@@ -81,74 +82,69 @@ public class BaseClass {
     public void loginOnSiteAndFillFormsTest(MetalsAndColorsTestData testData) {
 
         EpamSite.getHeaderMenu().metalsAndColors.click();
-        MetalsAndColorsPage metalsAndColorsPage = EpamSite.getMetalsAndColorsPage();
-        metalsAndColorsPage.checkOpened();
+        EpamSite.getMetalsAndColorsPage().checkOpened();
 
-        metalsAndColorsPage.builder()
-                .setSummaryValues(testData.getSummary())
-                .setElementsValues(testData.getElements())
-                .setColorsValue(testData.getColor())
-                .setMetalsValue(testData.getMetals())
-                .setVegetablesValue(testData.getVegetables())
-                .submit();
+        EpamSite.getMetalsAndColorsPage().setValuesOnPage(testData);
 
-        List<String> resultsPattern = new ArrayList<String>();
-        resultsPattern.add("Summary: ");
-        if (testData.getElements() != null) {
-            resultsPattern.add("Elements: ");
-        }
-        resultsPattern.add("Color: ");
-        resultsPattern.add("Metal: ");
-        resultsPattern.add("Vegetables: ");
+        // Match with pattern
+        List<String> resultsPattern = testData.getResultsPattern();
+        assertEquals(EpamSite.getMetalsAndColorsPage().getResults().size(), resultsPattern.size());
 
         SoftAssert softAssert = new SoftAssert();
-        WebList results = metalsAndColorsPage.getResults();
-        assertEquals(results.size(), resultsPattern.size());
+        List<String> results = new ArrayList<String>();
         for (int i = 0; i < resultsPattern.size(); ++i) {
-            softAssert.assertTrue(results.get(i+1).getText().contains(resultsPattern.get(i)));
+            String[] str = EpamSite.getMetalsAndColorsPage().getResults().get(i + 1)
+                    .getText().split(": ");
+            results.add(str[1]);
+            softAssert.assertEquals(str[0], resultsPattern.get(i),
+                    "Match with pattern, iteration " + i + ":");
         }
 
-        int posSummary = 1;
-        int posElements = 2;
-        int posColor = 3;
-        int posMetal = 4;
-        int posVegetables = 5;
+        int posSummary = 0;
+        int posElements = 1;
+        int posColor = 2;
+        int posMetal = 3;
+        int posVegetables = 4;
 
         // Check results
         if (testData.getSummary() != null) {
-            softAssert.assertTrue(results.get(posSummary).getText()
-                    .contains(Integer.toString(testData.getSummary().get(0) + testData.getSummary().get(1))));
+            softAssert.assertEquals(results.get(posSummary),
+                    Integer.toString(testData.getSummary().get(0) + testData.getSummary().get(1)),
+                    "Check summary: ");
         }
 
         if (testData.getElements() != null) {
             List<String> elements = testData.getElements();
-            String elementsResult = results.get(posElements).getText();
-            softAssert.assertEquals(elementsResult.split(", ").length, elements.size());
-            for (String str : elements) {
-                softAssert.assertTrue(elementsResult.contains(str));
-            }
+            String[] elementsResults = results.get(posElements).split(", ");
+            softAssert.assertEquals(elementsResults.length, elements.size(),
+                    "Check size of elements");
+            softAssert.assertEqualsNoOrder(elementsResults, elements.toArray(),
+                    "Check elements");
         } else {
-            posColor = 2;
-            posMetal = 3;
-            posVegetables = 4;
+            posColor = 1;
+            posMetal = 2;
+            posVegetables = 3;
         }
 
         if (testData.getColor() != null) {
-            softAssert.assertTrue(results.get(posColor).getText().contains(testData.getColor()));
+            softAssert.assertEquals(results.get(posColor), testData.getColor(),
+                    "Check color");
         }
         if (testData.getMetals() != null) {
-            softAssert.assertTrue(results.get(posMetal).getText().contains(testData.getMetals()));
+            softAssert.assertEquals(results.get(posMetal), testData.getMetals(),
+                    "Check metals");
         }
 
         if (testData.getVegetables() != null) {
             List<String> vegetables = testData.getVegetables();
-            String vegetablesResult = results.get(posVegetables).getText();
-            softAssert.assertEquals(vegetablesResult.split(", ").length, vegetables.size());
-            for (String str : vegetables) {
-                softAssert.assertTrue(vegetablesResult.contains(str));
-            }
+            String[] vegetablesResults = results.get(posVegetables).split(", ");
+            softAssert.assertEquals(vegetablesResults.length, vegetables.size(),
+                    "Check size of vegetables");
+            softAssert.assertEqualsNoOrder(vegetablesResults, vegetables.toArray(),
+                    "Check vegetables");
         }
 
         softAssert.assertAll();
     }
+
 }

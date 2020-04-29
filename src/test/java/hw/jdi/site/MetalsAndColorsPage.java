@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.ui.html.elements.common.Button;
+import hw.jdi.MetalsAndColorsTestData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -36,99 +37,62 @@ public class MetalsAndColorsPage extends WebPage {
         return results;
     }
 
-    public MetalsAndColorsPageBuilder builder() {
+    public void setValuesOnPage(MetalsAndColorsTestData data) {
 
-        return new MetalsAndColorsPageBuilder();
-    }
+        List<Integer> summary = data.getSummary();
+        if (summary != null && summary.size() == 2) {
 
-    public class MetalsAndColorsPageBuilder {
-
-        private MetalsAndColorsPageBuilder() {}
-
-        public MetalsAndColorsPageBuilder setSummaryValues(List<Integer> values) {
-
-            if (values == null || values.size() != 2) {
-                return this;
-            }
-
-            int odd = values.get(0);
-            int even = values.get(1);
-            if (odd % 2 == 0) {
+            int odd = summary.get(0);
+            int even = summary.get(1);
+            if ((odd % 2 == 0) && (even % 2 != 0)) {
                 even = odd;
-                odd = values.get(1);
-                if (odd % 2 == 0) {
-                    return this;
-                }
+                odd = summary.get(1);
             }
-
             oddsSelection.find(By.xpath("//label[contains(text(),'" + odd + "')]")).click();
             evensSelection.find(By.xpath("//label[contains(text(),'" + even + "')]")).click();
-
-            return this;
         }
-        public MetalsAndColorsPageBuilder setElementsValues(List<String> values) {
 
-            if (values == null) {
-                return this;
-            }
+        List<String> values = data.getElements();
+        if (values != null) {
 
             for (String el : values) {
                 elementsObject.getUIElement(el).click();
             }
-
-            return this;
         }
-        public MetalsAndColorsPageBuilder setColorsValue(String value) {
 
-            if (value == null) {
-                return this;
-            }
+        if (data.getColor() != null) {
 
             colors.toggle();
-            badSelect(value, colors.finds(By.cssSelector("li")));
-
-            return this;
+            badSelect(data.getColor(), colors.finds(By.cssSelector("li")));
         }
-        public MetalsAndColorsPageBuilder setMetalsValue(String value) {
 
-            if (value == null) {
-                return this;
-            }
+        if (data.getMetals() != null) {
 
             metals.toggle();
-            badSelect(value, metals.finds(By.cssSelector("li")));
-
-            return this;
+            badSelect(data.getMetals(), metals.finds(By.cssSelector("li")));
         }
-        public MetalsAndColorsPageBuilder setVegetablesValue(List<String> values) {
 
-            if (values == null) {
-                return this;
-            }
-
+        values = data.getVegetables();
+        if (values != null) {
             vegetables.toggle();
             // Remove default selected value
             badSelect("Vegetables", vegetables.finds(By.cssSelector("li")));
             for (String value : values) {
                 badSelect(value, vegetables.finds(By.cssSelector("li")));
             }
-
-            return this;
         }
 
-        public void submit() {
+        submitButton.click();
+    }
 
-            submitButton.click();
-        }
+    private void badSelect(String value, WebList selector) {
 
-        private void badSelect(String value, WebList selector) {
-
-            for (WebElement el : selector) {
-                if (el.getText().equals(value)) {
-                    el.click();
-                    return;
-                }
+        for (WebElement el : selector) {
+            if (el.getText().equals(value)) {
+                el.click();
+                return;
             }
         }
     }
+
 }
