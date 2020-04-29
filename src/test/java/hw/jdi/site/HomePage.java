@@ -7,6 +7,7 @@ public class HomePage extends WebPage {
     private LoginForm loginForm;
 
     public void login(User user) {
+
         loginForm.login(user);
     }
 

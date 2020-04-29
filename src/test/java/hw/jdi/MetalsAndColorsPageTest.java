@@ -27,8 +27,8 @@ public class MetalsAndColorsPageTest {
         User user = new User("Roman", "Jdi1234", "ROMAN IOVLEV");
         EpamSite.getHomePage().login(user);
         EpamSite.getHomePage().getLoginForm().getUserName().is().text(user.getFullName());
-
     }
+
     @AfterTest
     public void afterTestMethod() {
 
@@ -39,30 +39,30 @@ public class MetalsAndColorsPageTest {
             dataProviderClass = DataProviders.class)
     public void loginOnSiteAndFillFormsTest(MetalsAndColorsTestData testData) {
 
+        List<String> resultsPattern = testData.getResultsPattern();
+        SoftAssert softAssert = new SoftAssert();
+        List<String> results = new ArrayList<String>();
+        int posSummary = 0;
+        int posElements = 1;
+        int posColor = 2;
+        int posMetal = 3;
+        int posVegetables = 4;
+
         EpamSite.getHeaderMenu().metalsAndColors.click();
         EpamSite.getMetalsAndColorsPage().checkOpened();
 
         EpamSite.getMetalsAndColorsPage().setValuesOnPage(testData);
 
         // Match with pattern
-        List<String> resultsPattern = testData.getResultsPattern();
         assertEquals(EpamSite.getMetalsAndColorsPage().getResults().size(), resultsPattern.size());
 
-        SoftAssert softAssert = new SoftAssert();
-        List<String> results = new ArrayList<String>();
-        for (int i = 0; i < resultsPattern.size(); ++i) {
-            String[] str = EpamSite.getMetalsAndColorsPage().getResults().get(i + 1)
+        for (int i = 0, jdiIndent = 1; i < resultsPattern.size(); ++i) {
+            String[] str = EpamSite.getMetalsAndColorsPage().getResults().get(i + jdiIndent)
                     .getText().split(": ");
             results.add(str[1]);
             softAssert.assertEquals(str[0], resultsPattern.get(i),
                     "Match with pattern, iteration " + i + ":");
         }
-
-        int posSummary = 0;
-        int posElements = 1;
-        int posColor = 2;
-        int posMetal = 3;
-        int posVegetables = 4;
 
         // Check results
         if (testData.getSummary() != null) {

@@ -16,6 +16,12 @@ public class DataProviders {
     public Object[][] getFromJsonMetalsAndColorsPageTestDataProvider() {
 
         JsonElement jsonData = null;
+        List<JsonElement> dataSet = new ArrayList<JsonElement>();
+        int numOfDataSet = 1;
+        List<MetalsAndColorsTestData> testData = new ArrayList<MetalsAndColorsTestData>();
+        Gson gson = new Gson();
+        Object[][] returnValue = new Object[testData.size()][1];
+
         try {
             jsonData = new JsonParser().parse(
                     new FileReader("src/test/resources/JDI_ex8_metalsColorsDataSet.json")
@@ -24,22 +30,18 @@ public class DataProviders {
             e.printStackTrace();
         }
 
-        List<JsonElement> dataSet = new ArrayList<JsonElement>();
-        int numOfDataSet = 1;
         do {
             dataSet.add(jsonData.getAsJsonObject().get("data_" + numOfDataSet));
             ++numOfDataSet;
         } while (dataSet.get(numOfDataSet - 2) != null);
+        // Subtract 2 because ++ happens first (1)
+        // and from begining variable is indented from standard array numerization by one (2)
         dataSet.remove(numOfDataSet - 2);
 
-        List<MetalsAndColorsTestData> testData = new ArrayList<MetalsAndColorsTestData>();
-        Gson gson = new Gson();
         for (JsonElement el : dataSet) {
-
             testData.add(gson.fromJson(el, MetalsAndColorsTestData.class));
         }
 
-        Object[][] returnValue = new Object[testData.size()][1];
         for (int i = 0; i < returnValue.length; ++i) {
             returnValue[i][0] = testData.get(i);
         }

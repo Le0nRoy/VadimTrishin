@@ -18,22 +18,27 @@ public class MetalsAndColorsTestData {
 
         return summary;
     }
+
     public List<String> getElements() {
 
         return elements;
     }
+
     public String getColor() {
 
         return color;
     }
+
     public String getMetals() {
 
         return metals;
     }
+
     public List<String> getVegetables() {
 
         return vegetables;
     }
+
     public List<String> getResultsPattern() {
 
         List<String> resultsPattern = new ArrayList<String>();
@@ -47,6 +52,7 @@ public class MetalsAndColorsTestData {
 
         return resultsPattern;
     }
+
     @Override
     public String toString() {
 
@@ -58,4 +64,5 @@ public class MetalsAndColorsTestData {
                 ", vegetables=" + vegetables +
                 '}';
     }
+
 }

@@ -32,6 +32,7 @@ public class MetalsAndColorsPage extends WebPage {
 
     @Css(".info-panel-body-result li")
     private WebList results;
+
     public WebList getResults() {
 
         return results;
@@ -40,8 +41,9 @@ public class MetalsAndColorsPage extends WebPage {
     public void setValuesOnPage(MetalsAndColorsTestData data) {
 
         List<Integer> summary = data.getSummary();
-        if (summary != null && summary.size() == 2) {
+        List<String> values = data.getElements();
 
+        if (summary != null && summary.size() == 2) {
             int odd = summary.get(0);
             int even = summary.get(1);
             if ((odd % 2 == 0) && (even % 2 != 0)) {
@@ -52,22 +54,18 @@ public class MetalsAndColorsPage extends WebPage {
             evensSelection.find(By.xpath("//label[contains(text(),'" + even + "')]")).click();
         }
 
-        List<String> values = data.getElements();
         if (values != null) {
-
             for (String el : values) {
                 elementsObject.getUIElement(el).click();
             }
         }
 
         if (data.getColor() != null) {
-
             colors.toggle();
             badSelect(data.getColor(), colors.finds(By.cssSelector("li")));
         }
 
         if (data.getMetals() != null) {
-
             metals.toggle();
             badSelect(data.getMetals(), metals.finds(By.cssSelector("li")));
         }
@@ -75,6 +73,7 @@ public class MetalsAndColorsPage extends WebPage {
         values = data.getVegetables();
         if (values != null) {
             vegetables.toggle();
+
             // Remove default selected value
             badSelect("Vegetables", vegetables.finds(By.cssSelector("li")));
             for (String value : values) {

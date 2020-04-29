@@ -24,8 +24,10 @@ public class LoginForm extends Form<User> {
         userIcon.click();
         super.login(user);
     }
+
     public Text getUserName() {
 
         return userName;
     }
+
 }

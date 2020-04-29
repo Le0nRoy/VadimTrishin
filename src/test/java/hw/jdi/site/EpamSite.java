@@ -12,6 +12,7 @@ public class EpamSite {
     private static MetalsAndColorsPage metalsAndColorsPage;
 
     public static void open() {
+
         homePage.open();
     }
 
@@ -19,10 +20,12 @@ public class EpamSite {
 
         return homePage;
     }
+
     public static HeaderMenu getHeaderMenu() {
 
         return headerMenu;
     }
+
     public static MetalsAndColorsPage getMetalsAndColorsPage() {
 
         return metalsAndColorsPage;
