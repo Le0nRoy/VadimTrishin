@@ -4,7 +4,6 @@ import hw5.site.IndexPage;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,7 +20,8 @@ public class AbstractSteps implements Constants {
 
     public AbstractSteps() {
 
-        chromeDriver = new ChromeDriver();
+        WebDriverSingleton.INSTANCE.createdDriver("chrome");
+        chromeDriver = WebDriverSingleton.INSTANCE.getDriver();
         chromeDriver.manage().window().maximize();
         wait = new WebDriverWait(chromeDriver, WAIT_TIMEOUT);
         indexPage = PageFactory.initElements(chromeDriver, IndexPage.class);
