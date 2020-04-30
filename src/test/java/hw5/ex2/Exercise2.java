@@ -1,6 +1,6 @@
 package hw5.ex2;
 
-import hw5.BaseTestClass;
+import hw5.AbstractBaseTest;
 import hw5.site.DifferentElementsPage;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Parameters;
@@ -9,17 +9,21 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Exercise2 extends BaseTestClass {
+public class Exercise2 extends AbstractBaseTest {
 
     @Test
     @Parameters({"userName", "password"})
     private void exerciseTest(String userName, String password) {
 
         // Tasks 1 - 2
-        openSiteByURLAndCheckItsTitleTest();
+        steps.openSiteByURL(TEST_SITE_URL);
+        String expected = "Home Page";
+        steps.siteTitleShouldBe(expected);
 
         // Tasks 3 - 4
-        loginAndCheckUsername(userName, password);
+        steps.login(userName, password);
+        expected = "ROMAN IOVLEV";
+        steps.usernameShouldBe(expected);
 
         // Task 5
         DifferentElementsPage page = PageFactory.initElements(chromeDriver, DifferentElementsPage.class);

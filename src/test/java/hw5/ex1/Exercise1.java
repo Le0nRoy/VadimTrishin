@@ -1,9 +1,10 @@
 package hw5.ex1;
 
-import hw5.BaseTestClass;
+import hw5.AbstractBaseTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -11,17 +12,27 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Exercise1 extends BaseTestClass {
+public class Exercise1 extends AbstractBaseTest {
+
+    @BeforeTest
+    private void setupSteps() {
+
+        steps = new Exercise1Steps();
+    }
 
     @Test
     @Parameters({"userName", "password"})
     private void exerciseTest(String userName, String password) {
 
         // Tasks 1 - 2
-        openSiteByURLAndCheckItsTitleTest();
+        steps.openSiteByURL(TEST_SITE_URL);
+        String expected = "Home Page";
+        steps.siteTitleShouldBe(expected);
 
         // Tasks 3 - 4
-        loginAndCheckUsername(userName, password);
+        steps.login(userName, password);
+        expected = "ROMAN IOVLEV";
+        steps.usernameShouldBe(expected);
 
         // Task 5
         List<WebElement> elements = indexPage.getNavigationHeaderObject().getnavigationHeaderItems();
