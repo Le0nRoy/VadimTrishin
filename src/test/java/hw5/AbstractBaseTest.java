@@ -4,9 +4,9 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
-public class AbstractBaseTest implements Constants {
+public abstract class AbstractBaseTest implements Constants {
 
-    protected AbstractSteps steps;
+    protected AbstractSteps abstractSteps;
 
     @BeforeTest
     protected void beforeTestMethod() {
@@ -17,7 +17,7 @@ public class AbstractBaseTest implements Constants {
     @AfterTest
     protected void closeChrome() {
 
-        steps.closeDriver();
+        abstractSteps.closeDriver();
     }
 
 }

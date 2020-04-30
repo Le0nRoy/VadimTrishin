@@ -1,9 +1,6 @@
 package hw5.ex1;
 
 import hw5.AbstractBaseTest;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -14,19 +11,28 @@ import java.util.List;
 
 public class Exercise1 extends AbstractBaseTest {
 
+    Exercise1Steps steps;
+
     @BeforeTest
     private void setupSteps() {
 
-        steps = new Exercise1Steps();
+        abstractSteps = new Exercise1Steps();
+        steps = (Exercise1Steps) abstractSteps;
     }
 
     @Test
     @Parameters({"userName", "password"})
     private void exerciseTest(String userName, String password) {
 
+        String expected;
+        List<String> expectedNames;
+        int expectedNumOfElements;
+        int expectedNumOfImages;
+        int expectedNumOfTextsUnderImages;
+
         // Tasks 1 - 2
         steps.openSiteByURL(TEST_SITE_URL);
-        String expected = "Home Page";
+        expected = "Home Page";
         steps.siteTitleShouldBe(expected);
 
         // Tasks 3 - 4
@@ -35,48 +41,44 @@ public class Exercise1 extends AbstractBaseTest {
         steps.usernameShouldBe(expected);
 
         // Task 5
-        List<WebElement> elements = indexPage.getNavigationHeaderObject().getnavigationHeaderItems();
-        int expectedNumOfElements = 4;
-        List<String> expectedNames = new ArrayList<String>(Arrays.asList(
+        steps.getHeaderItems();
+        expectedNumOfElements = 4;
+        steps.numberOfElementsGotInPreviousStepShouldBe(expectedNumOfElements);
+        expectedNames = new ArrayList<String>(Arrays.asList(
                 "Home",
                 "Contact form",
                 "Service",
                 "Metals & Colors"
         ));
-        softAssert.assertEquals(elements.size(), expectedNumOfElements);
-        softAssert.assertNotSame(elements, expectedNames);
+        steps.elementsGotInPreviousStepShouldBe(expectedNames);
 
         // Task 6
-        elements = indexPage.getBenefitIconsObject().getbenefitIcons();
-        int expectedNumOfImages = 4;
-        softAssert.assertEquals(elements.size(), expectedNumOfImages);
+        steps.getBenefitIcons();
+        expectedNumOfImages = 4;
+        steps.numberOfElementsGotInPreviousStepShouldBe(expectedNumOfImages);
 
         // Task 7
-        elements = indexPage.getBenefitTextsObject().getBenefitTexts();
-        int expectedNumOfTextsUnderImages = 4;
-        softAssert.assertEquals(elements.size(), expectedNumOfTextsUnderImages);
+        steps.getBenefitTexts();
+        expectedNumOfTextsUnderImages = 4;
+        steps.numberOfElementsGotInPreviousStepShouldBe(expectedNumOfTextsUnderImages);
 
         // Task 8
-        WebElement frameButton = indexPage.getFrameButtonObject().getFrameButton();
-        String result = frameButton.getAttribute("src");
-        String expected = "https://jdi-testing.github.io/jdi-light/frame-button.html";
-        softAssert.assertEquals(result, expected);
+        steps.getFrameButton();
+        expected = "https://jdi-testing.github.io/jdi-light/frame-button.html";
+        steps.elementGotInPreviousStepAttributeValueShouldBe(expected, "src");
 
         // Task 9
-        chromeDriver.get(chromeDriver.findElement(
-                By.xpath("//*[@id='frame']")).getAttribute("src"));
-        frameButton = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//*[@value='Frame Button']")));
-        result = frameButton.getAttribute("value");
+        steps.getFrameButtonFromFrame();
         expected = "Frame Button";
-        softAssert.assertEquals(result, expected);
+        steps.elementGotInPreviousStepAttributeValueShouldBe(expected, "value");
 
         // Task 10
-        openSiteByURLAndCheckItsTitleTest();
+        steps.openSiteByURL(TEST_SITE_URL);
 
         // Task 11
-        elements = indexPage.getLeftMenuObject().getLeftMenuItems();
+        steps.getLeftMenuItems();
         expectedNumOfElements = 5;
+        steps.numberOfElementsGotInPreviousStepShouldBe(expectedNumOfElements);
         expectedNames = new ArrayList<String>(Arrays.asList(
                 "Home",
                 "Contact form",
@@ -84,7 +86,6 @@ public class Exercise1 extends AbstractBaseTest {
                 "Metals & Colors",
                 "Elements packs"
         ));
-        softAssert.assertEquals(elements.size(), expectedNumOfElements);
-        softAssert.assertNotSame(elements, expectedNames);
+        steps.elementsGotInPreviousStepShouldBe(expectedNames);
     }
 }
