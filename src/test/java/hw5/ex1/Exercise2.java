@@ -1,6 +1,8 @@
-package hw5.ex2;
+package hw5.ex1;
 
 import hw5.AbstractBaseTest;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -20,6 +22,8 @@ public class Exercise2 extends AbstractBaseTest {
         steps = (Exercise2Steps) abstractSteps;
     }
 
+    @Feature("Test for checking functionality of website")
+    @Story("Different Elements page test")
     @Test
     @Parameters({"userName", "password"})
     private void exerciseTest(String userName, String password) {

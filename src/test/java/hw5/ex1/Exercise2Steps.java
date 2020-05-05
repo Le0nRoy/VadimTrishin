@@ -1,4 +1,4 @@
-package hw5.ex2;
+package hw5.ex1;
 
 import hw5.AbstractSteps;
 import hw5.site.DifferentElementsPage;
