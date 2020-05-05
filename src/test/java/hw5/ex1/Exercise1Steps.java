@@ -8,6 +8,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotSame;
+
 public class Exercise1Steps extends AbstractSteps {
 
     private List<WebElement> elements;
@@ -61,20 +64,20 @@ public class Exercise1Steps extends AbstractSteps {
     @Step("Number of elements in previous step should be '{0}")
     public void numberOfElementsGotInPreviousStepShouldBe(int expectedNumberOfElements) {
 
-        softAssert.assertEquals(elements.size(), expectedNumberOfElements);
+        assertEquals(elements.size(), expectedNumberOfElements);
     }
 
     @Step("Elements got in previous step should be '{0}")
     public void elementsGotInPreviousStepShouldBe(List<String> expectedElements) {
 
-        softAssert.assertNotSame(elements, expectedElements);
+        assertNotSame(elements, expectedElements);
     }
 
     @Step("Attribute '{1}' of element got in previous step should be '{0}")
     public void elementGotInPreviousStepAttributeValueShouldBe(String expectedAttributeValue, String attributeName) {
 
         String result = element.getAttribute(attributeName);
-        softAssert.assertEquals(result, expectedAttributeValue);
+        assertEquals(result, expectedAttributeValue);
     }
 
 }

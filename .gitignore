@@ -4,3 +4,4 @@ target/*
 Materials*
 *.iml
 allure-results/*
+.allure/

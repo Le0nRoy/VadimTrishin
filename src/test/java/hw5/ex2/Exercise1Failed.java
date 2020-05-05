@@ -35,45 +35,6 @@ public class Exercise1Failed extends BaseTestClass {
         softAssert.assertEquals(elements.size(), expectedNumOfElements);
         softAssert.assertNotSame(elements, expectedNames);
 
-        // Task 6
-        elements = indexPage.getBenefitIconsObject().getbenefitIcons();
-        int expectedNumOfImages = 4;
-        softAssert.assertEquals(elements.size(), expectedNumOfImages);
-
-        // Task 7
-        elements = indexPage.getBenefitTextsObject().getBenefitTexts();
-        int expectedNumOfTextsUnderImages = 4;
-        softAssert.assertEquals(elements.size(), expectedNumOfTextsUnderImages);
-
-        // Task 8
-        WebElement frameButton = indexPage.getFrameButtonObject().getFrameButton();
-        String result = frameButton.getAttribute("src");
-        String expected = "https://jdi-testing.github.io/jdi-light/frame-button.html FAILED";
-        softAssert.assertEquals(result, expected);
-
-        // Task 9
-        chromeDriver.get(chromeDriver.findElement(
-                By.xpath("//*[@id='frame']")).getAttribute("src"));
-        frameButton = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//*[@value='Frame Button']")));
-        result = frameButton.getAttribute("value");
-        expected = "Frame Button FAILED";
-        softAssert.assertEquals(result, expected);
-
-        // Task 10
-        openSiteByURLAndCheckItsTitleTest();
-
-        // Task 11
-        elements = indexPage.getLeftMenuObject().getLeftMenuItems();
-        expectedNumOfElements = 5;
-        expectedNames = new ArrayList<String>(Arrays.asList(
-                "Home",
-                "Contact form FAILED",
-                "Service",
-                "Metals & Colors",
-                "Elements packs"
-        ));
-        softAssert.assertEquals(elements.size(), expectedNumOfElements);
-        softAssert.assertNotSame(elements, expectedNames);
+        softAssert.assertAll();
     }
 }

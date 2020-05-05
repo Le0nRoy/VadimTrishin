@@ -90,7 +90,8 @@ public class DifferentElementsPage implements Constants {
             for (Iterator<WebElement> iterator = checkboxes.iterator(); iterator.hasNext(); ) {
                 WebElement el = iterator.next();
                 if (el.getText().equals(checkboxName)) {
-                    return el.isSelected();
+                    return el.isEnabled();
+//                    return el.isSelected();
                 }
             }
             return false;
@@ -153,10 +154,8 @@ public class DifferentElementsPage implements Constants {
         }
         public boolean isElementSelected(String colorName) {
 
-            if (colorsSelect.getText().equals(colorName)) {
-                return true;
-            }
-            return false;
+            System.out.println(colorsSelect.getText());
+            return colorsSelect.getText().equals(colorName);
         }
     }
 

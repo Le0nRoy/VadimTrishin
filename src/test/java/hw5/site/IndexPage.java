@@ -63,7 +63,7 @@ public class IndexPage implements Constants {
 
     public class NavigationHeaderObject extends PageComponent {
 
-        @FindBy(css = ".navbar-nav > li > a")
+        @FindBy(css = ".m-l8 > li > a")
         private List<WebElement> navigationHeaderItems;
         public NavigationHeaderObject(WebDriver driver) {
 
@@ -87,7 +87,7 @@ public class IndexPage implements Constants {
 
     public class LeftMenuObject extends PageComponent {
 
-        @FindBy(css = ".sidebar-menu span")
+        @FindBy(css = ".sidebar-menu > li > a > span")
         private List<WebElement> leftMenuItems;
         public LeftMenuObject(WebDriver driver) {
 

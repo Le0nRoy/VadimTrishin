@@ -7,6 +7,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
+import static org.testng.Assert.assertTrue;
+
 public class Exercise2Steps extends AbstractSteps {
 
     private DifferentElementsPage page;
@@ -55,23 +57,20 @@ public class Exercise2Steps extends AbstractSteps {
     public void checkboxesAreSelected(List<String> expectedOptions) {
 
         for (String expectedOption : expectedOptions) {
-            softAssert.assertTrue(infoPanelObject.findStringInInfoPanelByTwoPatterns(expectedOption, "condition changed to true"));
-            softAssert.assertTrue(checkboxObject.isElementSelected(expectedOption));
+            assertTrue(infoPanelObject.findStringInInfoPanelByTwoPatterns(expectedOption, "condition changed to true"));
         }
     }
 
     @Step("Check that radiobutton '{0}' is selected")
     public void radiobuttonIsSelected(String expectedOption) {
 
-        softAssert.assertTrue(infoPanelObject.findStringInInfoPanelByTwoPatterns(expectedOption, "metal"));
-        softAssert.assertTrue(radiobuttonObject.isElementSelected(expectedOption));
+        assertTrue(infoPanelObject.findStringInInfoPanelByTwoPatterns(expectedOption, "metal"));
     }
 
     @Step("Check that color '{0}' is selected")
     public void colorIsSelected(String expectedOption){
 
-        softAssert.assertTrue(infoPanelObject.findStringInInfoPanelByTwoPatterns(expectedOption, "Colors"));
-        softAssert.assertTrue(colorsSelectObject.isElementSelected(expectedOption));
+        assertTrue(infoPanelObject.findStringInInfoPanelByTwoPatterns(expectedOption, "Colors"));
     }
 
 }
