@@ -1,13 +1,12 @@
 package hw_api2;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.ToString;
 
 @ToString
+@Getter
 @AllArgsConstructor
 public class TestDataEntity {
-    private String text;
-    private String lang;
-    private String options;
-    private String format;
+    private String url;
 }

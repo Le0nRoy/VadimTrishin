@@ -18,30 +18,6 @@ import java.util.Properties;
 public class DataProviders {
 
     @DataProvider
-    public Object[][] propertiesDataProvider() {
-
-        Properties properties = new Properties();
-        String propFileName = "hw_api2/test.properties";
-        try {
-            properties.load(getClass().getClassLoader().getResourceAsStream(propFileName));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        String text = properties.getProperty("text");
-        String lang = properties.getProperty("lang");
-        String options = properties.getProperty("options");
-        String format = properties.getProperty("format");
-        // FIXME уточнить, нужен именно .properties файл или же можно создать json со всеми тестовыми данными?
-        //  если именно .properties, то он должен быть один со всеми тестовыми данными? или куча?
-        TestDataEntity testDataEntity = new TestDataEntity(text, lang, options, format);
-
-        String jsonString = new Gson().toJson(testDataEntity);
-
-        return new Object[1][1];
-    }
-
-    @DataProvider
     public Object[][] jsonDataProvider() {
 
         String propFileName = "src/test/resources/hw_api2/test.json";
