@@ -2,18 +2,14 @@ package hw_api2;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import hw.jdi.MetalsAndColorsTestData;
 import org.testng.annotations.DataProvider;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Properties;
 
 public class DataProviders {
 
@@ -24,6 +20,8 @@ public class DataProviders {
         JsonElement jsonData = null;
         List<JsonElement> dataSet = new ArrayList<JsonElement>();
         int numOfDataSet = 1;
+        Gson gson = new Gson();
+        List<TestDataEntity> testDataEntities = new ArrayList<TestDataEntity>();
         Object[][] returnValue;
 
         try {
@@ -42,9 +40,13 @@ public class DataProviders {
         // and from begining variable is indented from standard array numerization by one (2)
         dataSet.remove(numOfDataSet - 2);
 
-        returnValue = new Object[dataSet.size()][1];
-        for (int i = 0; i < dataSet.size(); ++i) {
-            returnValue[i][0] = dataSet.get(i);
+        for (JsonElement el : dataSet) {
+            testDataEntities.add(gson.fromJson(el, TestDataEntity.class));
+        }
+
+        returnValue = new Object[testDataEntities.size()][1];
+        for (int i = 0; i < testDataEntities.size(); ++i) {
+            returnValue[i][0] = testDataEntities.get(i);
         }
         return returnValue;
     }

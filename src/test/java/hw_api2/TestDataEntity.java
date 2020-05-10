@@ -1,12 +1,20 @@
 package hw_api2;
 
+import com.google.gson.annotations.Expose;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.ToString;
 
-@ToString
 @Getter
 @AllArgsConstructor
 public class TestDataEntity {
-    private String url;
+
+    int numOfErrorsExpected;
+    @Expose
+    int options;
+    @Expose
+    String text;
+    @Expose
+    String lang;
+    @Expose
+    String format;
 }
