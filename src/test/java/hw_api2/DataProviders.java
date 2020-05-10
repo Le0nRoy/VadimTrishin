@@ -3,7 +3,7 @@ package hw_api2;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import hw.jdi.MetalsAndColorsTestData;
+import hw_api2.entities.TestDataEntity;
 import org.testng.annotations.DataProvider;
 
 import java.io.FileNotFoundException;
@@ -13,10 +13,25 @@ import java.util.List;
 
 public class DataProviders {
 
-    @DataProvider
-    public Object[][] jsonDataProvider() {
+    private String propFileName;
+    private String jsonDataNamePattern = "data_";
 
-        String propFileName = "src/test/resources/hw_api2/test.json";
+    @DataProvider
+    public Object[][] rightRequestDataProvider() {
+
+        propFileName = "src/test/resources/hw_api2/rightRequest.json";
+        return jsonParser();
+    }
+
+    @DataProvider
+    public Object[][] wrongRequestDataProvider() {
+
+        propFileName = "src/test/resources/hw_api2/wrongRequest.json";
+        return jsonParser();
+    }
+
+    public Object[][] jsonParser() {
+
         JsonElement jsonData = null;
         List<JsonElement> dataSet = new ArrayList<JsonElement>();
         int numOfDataSet = 1;
@@ -33,7 +48,7 @@ public class DataProviders {
         }
 
         do {
-            dataSet.add(jsonData.getAsJsonObject().get("data_" + numOfDataSet));
+            dataSet.add(jsonData.getAsJsonObject().get(jsonDataNamePattern + numOfDataSet));
             ++numOfDataSet;
         } while (dataSet.get(numOfDataSet - 2) != null);
         // Subtract 2 because ++ happens first (1)

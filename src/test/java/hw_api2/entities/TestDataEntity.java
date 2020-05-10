@@ -1,4 +1,4 @@
-package hw_api2;
+package hw_api2.entities;
 
 import com.google.gson.annotations.Expose;
 import lombok.AllArgsConstructor;
