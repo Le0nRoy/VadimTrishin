@@ -2,6 +2,7 @@ package hw_api2;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.testng.annotations.DataProvider;
 
@@ -43,16 +44,15 @@ public class DataProviders {
     @DataProvider
     public Object[][] jsonDataProvider() {
 
+        String propFileName = "src/test/resources/hw_api2/test.json";
         JsonElement jsonData = null;
         List<JsonElement> dataSet = new ArrayList<JsonElement>();
         int numOfDataSet = 1;
-//        List<TestDataEntity> testData = new ArrayList<TestDataEntity>();
-        Gson gson = new Gson();
-        Object[][] returnValue = new Object[1][1];
+        Object[][] returnValue;
 
         try {
             jsonData = new JsonParser().parse(
-                    new FileReader("src/test/resources/hw_api2/test.json")
+                    new FileReader(propFileName)
             );
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -66,8 +66,10 @@ public class DataProviders {
         // and from begining variable is indented from standard array numerization by one (2)
         dataSet.remove(numOfDataSet - 2);
 
-        returnValue[0] = dataSet.toArray();
-
+        returnValue = new Object[dataSet.size()][1];
+        for (int i = 0; i < dataSet.size(); ++i) {
+            returnValue[i][0] = dataSet.get(i);
+        }
         return returnValue;
     }
 }
