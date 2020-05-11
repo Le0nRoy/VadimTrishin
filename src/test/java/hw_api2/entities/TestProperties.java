@@ -1,12 +1,14 @@
 package hw_api2.entities;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.Data;
 
-@ToString
-@Getter
+@Data
 @AllArgsConstructor
 public class TestProperties {
+
     private String url;
+    private String testDataPath;
+    private String jsonDataNamePattern;
 }
+

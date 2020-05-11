@@ -13,24 +13,21 @@ import java.util.List;
 
 public class DataProviders {
 
-    private String propFileName;
-    private String jsonDataNamePattern = "data_";
+    private static String testDataPath;
+    private static String jsonDataNamePattern;
+
+    public static void setTestDataPath(String str) {
+
+        DataProviders.testDataPath = str;
+    }
+
+    public static void setJsonDataNamePattern(String str) {
+
+        DataProviders.jsonDataNamePattern = str;
+    }
 
     @DataProvider
     public Object[][] rightRequestDataProvider() {
-
-        propFileName = "src/test/resources/hw_api2/rightRequest.json";
-        return jsonParser();
-    }
-
-    @DataProvider
-    public Object[][] wrongRequestDataProvider() {
-
-        propFileName = "src/test/resources/hw_api2/wrongRequest.json";
-        return jsonParser();
-    }
-
-    public Object[][] jsonParser() {
 
         JsonElement jsonData = null;
         List<JsonElement> dataSet = new ArrayList<JsonElement>();
@@ -40,9 +37,7 @@ public class DataProviders {
         Object[][] returnValue;
 
         try {
-            jsonData = new JsonParser().parse(
-                    new FileReader(propFileName)
-            );
+            jsonData = new JsonParser().parse(new FileReader(testDataPath));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
