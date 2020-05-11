@@ -1,4 +1,4 @@
-package hw_api2.entities;
+package hw_api2.entities.testData;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -3,8 +3,8 @@ package hw_api2;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import hw_api2.entities.SpellerTextsTestDataEntity;
-import lombok.Data;
+import hw_api2.entities.testData.SpellerTextTestDataEntity;
+import hw_api2.entities.testData.SpellerTextsTestDataEntity;
 import org.testng.annotations.DataProvider;
 
 import java.io.FileNotFoundException;
@@ -42,17 +42,6 @@ public class DataProviders {
     @DataProvider
     public Object[][] spellerTextsDataProvider() {
 
-        return jsonExtractor(spellerTextsJsonDataPath, spellerTextsJsonDataNamePattern);
-    }
-
-    @DataProvider
-    public Object[][] spellerTextDataProvider() {
-
-        return jsonExtractor(spellerTextJsonDataPath, spellerTextJsonDataNamePattern);
-    }
-
-    private Object[][] jsonExtractor(String jsonPath, String jsonDataNamePattern) {
-
         JsonElement jsonData = null;
         List<JsonElement> dataSet = new ArrayList<JsonElement>();
         int numOfDataSet = 1;
@@ -61,13 +50,13 @@ public class DataProviders {
         Object[][] returnValue;
 
         try {
-            jsonData = new JsonParser().parse(new FileReader(jsonPath));
+            jsonData = new JsonParser().parse(new FileReader(spellerTextsJsonDataPath));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
         do {
-            dataSet.add(jsonData.getAsJsonObject().get(jsonDataNamePattern + numOfDataSet));
+            dataSet.add(jsonData.getAsJsonObject().get(spellerTextsJsonDataNamePattern + numOfDataSet));
             ++numOfDataSet;
         } while (dataSet.get(numOfDataSet - 2) != null);
         // Subtract 2 because ++ happens first (1)
@@ -76,6 +65,41 @@ public class DataProviders {
 
         for (JsonElement el : dataSet) {
             testDataEntities.add(gson.fromJson(el, SpellerTextsTestDataEntity.class));
+        }
+
+        returnValue = new Object[testDataEntities.size()][1];
+        for (int i = 0; i < testDataEntities.size(); ++i) {
+            returnValue[i][0] = testDataEntities.get(i);
+        }
+        return returnValue;
+    }
+
+    @DataProvider
+    public Object[][] spellerTextDataProvider() {
+
+        JsonElement jsonData = null;
+        List<JsonElement> dataSet = new ArrayList<JsonElement>();
+        int numOfDataSet = 1;
+        Gson gson = new Gson();
+        List<SpellerTextTestDataEntity> testDataEntities = new ArrayList<SpellerTextTestDataEntity>();
+        Object[][] returnValue;
+
+        try {
+            jsonData = new JsonParser().parse(new FileReader(spellerTextJsonDataPath));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        do {
+            dataSet.add(jsonData.getAsJsonObject().get(spellerTextJsonDataNamePattern + numOfDataSet));
+            ++numOfDataSet;
+        } while (dataSet.get(numOfDataSet - 2) != null);
+        // Subtract 2 because ++ happens first (1)
+        // and from begining variable is indented from standard array numerization by one (2)
+        dataSet.remove(numOfDataSet - 2);
+
+        for (JsonElement el : dataSet) {
+            testDataEntities.add(gson.fromJson(el, SpellerTextTestDataEntity.class));
         }
 
         returnValue = new Object[testDataEntities.size()][1];

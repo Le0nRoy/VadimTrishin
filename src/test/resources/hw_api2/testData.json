@@ -12,5 +12,19 @@
     "lang": "en",
     "format": "plain",
     "options": 8
+  },
+  "dataText_1": {
+    "expectedCodeOfError": 0,
+    "text": "Synchronization",
+    "lang": "en",
+    "format":  "plain",
+    "options": 8
+  },
+  "dataText_2": {
+    "expectedCodeOfError": 3,
+    "text": "dubai",
+    "lang": "en",
+    "format":  "plain",
+    "options": 8
   }
 }

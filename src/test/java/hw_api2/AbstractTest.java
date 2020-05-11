@@ -6,6 +6,7 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.specification.RequestSpecification;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 
 import java.io.IOException;
@@ -13,7 +14,7 @@ import java.util.Properties;
 
 public class AbstractTest {
 
-    protected TestProperties testProperties;
+    protected static TestProperties testProperties;
     protected RequestSpecification requestSpecification;
 
     @BeforeSuite
@@ -39,6 +40,10 @@ public class AbstractTest {
         DataProviders.setSpellerTextsJsonDataPath(testProperties.getSpellerTextsJsonDataPath());
         DataProviders.setSpellerTextJsonDataNamePattern(testProperties.getSpellerTextJsonDataNamePattern());
         DataProviders.setSpellerTextsJsonDataNamePattern(testProperties.getSpellerTextsJsonDataNamePattern());
+    }
+
+    @BeforeClass
+    public void setupRequestSpecification() {
 
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
 

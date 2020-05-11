@@ -1,7 +1,7 @@
 package hw_api2;
 
 import hw_api2.entities.DTO.YandexSpellerRequestDTO;
-import hw_api2.entities.SpellerTextsTestDataEntity;
+import hw_api2.entities.testData.SpellerTextsTestDataEntity;
 import hw_api2.entities.DTO.YandexSpellerResponseDTO;
 import hw_api2.service.YandexSpellerService;
 import org.testng.annotations.Test;
