@@ -3,7 +3,7 @@
 <suite name="Rest Assured Homework">
     <test name="Rest Assured Test">
         <classes>
-            <class name="hw_api2.GoodRequestTests" />
+            <class name="hw_api2.RequestTests" />
         </classes>
     </test>
 </suite>

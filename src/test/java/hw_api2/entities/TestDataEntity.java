@@ -9,6 +9,7 @@ import lombok.Getter;
 public class TestDataEntity {
 
     int numOfErrorsExpected;
+    String expectedMistakes;
     @Expose
     int options;
     @Expose

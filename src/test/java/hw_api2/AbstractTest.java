@@ -1,7 +1,10 @@
 package hw_api2;
 
 import hw_api2.entities.TestProperties;
+import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.BeforeSuite;
 
@@ -33,8 +36,12 @@ public class AbstractTest {
         DataProviders.setTestDataPath(testProperties.getTestDataPath());
         DataProviders.setJsonDataNamePattern(testProperties.getJsonDataNamePattern());
 
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+
         requestSpecification = new RequestSpecBuilder()
                 .setBaseUri(testProperties.getUrl())
+//                .addFilter(new RequestLoggingFilter())
+//                .addFilter(new ResponseLoggingFilter())
                 .build();
     }
 
