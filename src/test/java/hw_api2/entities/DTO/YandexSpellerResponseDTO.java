@@ -1,4 +1,4 @@
-package hw_api2.entities;
+package hw_api2.entities.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class YandexSpellerDTO {
+public class YandexSpellerResponseDTO {
 
     private int code;
     private int pos;
