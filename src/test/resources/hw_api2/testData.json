@@ -1,12 +1,12 @@
 {
-  "data_1": {
+  "dataTexts_1": {
     "numOfErrorsExpected": 0,
     "text": "test data to be tested",
     "lang": "en",
     "format": "plain",
     "options": 8
   },
-  "data_2": {
+  "dataTexts_2": {
     "numOfErrorsExpected": 2,
     "text": "texta data to be faiLet",
     "lang": "en",

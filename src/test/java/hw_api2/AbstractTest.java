@@ -29,12 +29,16 @@ public class AbstractTest {
 
         testProperties = new TestProperties(
                 properties.getProperty("URL"),
-                properties.getProperty("testDataPath"),
-                properties.getProperty("jsonDataNamePattern")
+                properties.getProperty("spellerTextJsonDataPath"),
+                properties.getProperty("spellerTextsJsonDataPath"),
+                properties.getProperty("spellerTextJsonDataNamePattern"),
+                properties.getProperty("spellerTextsJsonDataNamePattern")
         );
 
-        DataProviders.setTestDataPath(testProperties.getTestDataPath());
-        DataProviders.setJsonDataNamePattern(testProperties.getJsonDataNamePattern());
+        DataProviders.setSpellerTextJsonDataPath(testProperties.getSpellerTextJsonDataPath());
+        DataProviders.setSpellerTextsJsonDataPath(testProperties.getSpellerTextsJsonDataPath());
+        DataProviders.setSpellerTextJsonDataNamePattern(testProperties.getSpellerTextJsonDataNamePattern());
+        DataProviders.setSpellerTextsJsonDataNamePattern(testProperties.getSpellerTextsJsonDataNamePattern());
 
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
 

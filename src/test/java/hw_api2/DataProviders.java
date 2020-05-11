@@ -3,7 +3,8 @@ package hw_api2;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import hw_api2.entities.TestDataEntity;
+import hw_api2.entities.SpellerTextsTestDataEntity;
+import lombok.Data;
 import org.testng.annotations.DataProvider;
 
 import java.io.FileNotFoundException;
@@ -13,31 +14,54 @@ import java.util.List;
 
 public class DataProviders {
 
-    private static String testDataPath;
-    private static String jsonDataNamePattern;
+    private static String spellerTextJsonDataPath;
+    private static String spellerTextsJsonDataPath;
+    private static String spellerTextJsonDataNamePattern;
+    private static String spellerTextsJsonDataNamePattern;
 
-    public static void setTestDataPath(String str) {
+    public static void setSpellerTextJsonDataPath(String spellerTextJsonDataPath) {
 
-        DataProviders.testDataPath = str;
+        DataProviders.spellerTextJsonDataPath = spellerTextJsonDataPath;
     }
 
-    public static void setJsonDataNamePattern(String str) {
+    public static void setSpellerTextsJsonDataPath(String spellerTextsJsonDataPath) {
 
-        DataProviders.jsonDataNamePattern = str;
+        DataProviders.spellerTextsJsonDataPath = spellerTextsJsonDataPath;
+    }
+
+    public static void setSpellerTextJsonDataNamePattern(String spellerTextJsonDataNamePattern) {
+
+        DataProviders.spellerTextJsonDataNamePattern = spellerTextJsonDataNamePattern;
+    }
+
+    public static void setSpellerTextsJsonDataNamePattern(String spellerTextsJsonDataNamePattern) {
+
+        DataProviders.spellerTextsJsonDataNamePattern = spellerTextsJsonDataNamePattern;
     }
 
     @DataProvider
-    public Object[][] rightRequestDataProvider() {
+    public Object[][] spellerTextsDataProvider() {
+
+        return jsonExtractor(spellerTextsJsonDataPath, spellerTextsJsonDataNamePattern);
+    }
+
+    @DataProvider
+    public Object[][] spellerTextDataProvider() {
+
+        return jsonExtractor(spellerTextJsonDataPath, spellerTextJsonDataNamePattern);
+    }
+
+    private Object[][] jsonExtractor(String jsonPath, String jsonDataNamePattern) {
 
         JsonElement jsonData = null;
         List<JsonElement> dataSet = new ArrayList<JsonElement>();
         int numOfDataSet = 1;
         Gson gson = new Gson();
-        List<TestDataEntity> testDataEntities = new ArrayList<TestDataEntity>();
+        List<SpellerTextsTestDataEntity> testDataEntities = new ArrayList<SpellerTextsTestDataEntity>();
         Object[][] returnValue;
 
         try {
-            jsonData = new JsonParser().parse(new FileReader(testDataPath));
+            jsonData = new JsonParser().parse(new FileReader(jsonPath));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -51,7 +75,7 @@ public class DataProviders {
         dataSet.remove(numOfDataSet - 2);
 
         for (JsonElement el : dataSet) {
-            testDataEntities.add(gson.fromJson(el, TestDataEntity.class));
+            testDataEntities.add(gson.fromJson(el, SpellerTextsTestDataEntity.class));
         }
 
         returnValue = new Object[testDataEntities.size()][1];

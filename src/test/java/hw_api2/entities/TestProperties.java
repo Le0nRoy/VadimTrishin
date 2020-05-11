@@ -8,7 +8,9 @@ import lombok.Data;
 public class TestProperties {
 
     private String url;
-    private String testDataPath;
-    private String jsonDataNamePattern;
+    private String spellerTextJsonDataPath;
+    private String spellerTextsJsonDataPath;
+    private String spellerTextJsonDataNamePattern;
+    private String spellerTextsJsonDataNamePattern;
 }
 
