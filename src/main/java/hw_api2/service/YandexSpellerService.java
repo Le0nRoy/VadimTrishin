@@ -21,7 +21,6 @@ public class YandexSpellerService {
         YandexSpellerResponseDTO[] response = requestSpecification
                 .get()
                 .then()
-                .statusCode(200)
                 .extract()
                 .as(YandexSpellerResponseDTO[].class);
 
