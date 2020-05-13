@@ -10,13 +10,10 @@ import io.restassured.specification.RequestSpecification;
 
 import static hw_api2.utils.Parser.parseTestDataToYandexDTO;
 
-public class SpellerTextsTestSteps {
+public class SpellerTextsTestSteps extends AbstractSteps {
 
     private SpellerTextsTestAssertions spellerTextsTestAssertions;
     private SpellerTextsTestDataEntity spellerTextsTestDataEntity;
-    private YandexSpellerRequestDTO requestDTO;
-    private RequestSpecification requestSpecification;
-    private YandexSpellerResponseDTO[] response;
 
     public SpellerTextsTestSteps() {
 
@@ -27,17 +24,6 @@ public class SpellerTextsTestSteps {
 
         spellerTextsTestDataEntity = data;
         requestDTO = parseTestDataToYandexDTO(data);
-    }
-
-    public void setRequestSpecification(RequestSpecification specification) {
-
-        requestSpecification = specification;
-    }
-
-    public void sendRequestAndGetResponse() {
-
-        response = YandexSpellerService.getResponse(requestSpecification,
-                requestDTO);
     }
 
     public void validateNumberOfErrorsInResponse() {
