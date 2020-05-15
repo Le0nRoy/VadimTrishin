@@ -4,8 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import hw_api2.entities.DTO.YandexSpellerRequestDTO;
-import hw_api2.entities.testData.SpellerTextTestDataEntity;
-import hw_api2.entities.testData.SpellerTextsTestDataEntity;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -29,10 +27,10 @@ public class Parser {
     public static <T> Object[][] jsonFileParser(Class<T> classOfT, String pathToJsonFile, String jsonDataPattern) {
 
         JsonElement jsonData = null;
-        List<JsonElement> dataSet = new ArrayList<JsonElement>();
+        List<JsonElement> dataSet = new ArrayList<>();
         int numOfDataSet = 1;
         Gson gson = new Gson();
-        List<T> testDataEntities = new ArrayList<T>();
+        List<T> testDataEntities = new ArrayList<>();
         Object[][] returnValue;
 
         try {

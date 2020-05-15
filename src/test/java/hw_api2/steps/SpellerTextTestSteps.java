@@ -1,7 +1,6 @@
 package hw_api2.steps;
 
 import hw_api2.assertions.SpellerTextTestAssertions;
-import hw_api2.entities.DTO.YandexSpellerRequestDTO;
 import hw_api2.entities.testData.SpellerTextTestDataEntity;
 
 import static hw_api2.utils.Parser.parseTestDataToYandexDTO;

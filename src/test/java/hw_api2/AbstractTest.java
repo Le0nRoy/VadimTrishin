@@ -50,7 +50,7 @@ public class AbstractTest {
         requestSpecification = new RequestSpecBuilder()
                 .setBaseUri(testProperties.getUrl())
 //                .addFilter(new RequestLoggingFilter())
-//                .addFilter(new ResponseLoggingFilter())
+                .addFilter(new ResponseLoggingFilter())
                 .build();
     }
 
