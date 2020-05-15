@@ -14,26 +14,14 @@ import java.util.List;
 
 public class Parser {
 
-    public static YandexSpellerRequestDTO parseTestDataToYandexDTO(SpellerTextsTestDataEntity testData) {
+    public static YandexSpellerRequestDTO parseTestDataToYandexDTO(YandexSpellerRequestDTO testData) {
 
-        YandexSpellerRequestDTO requestDTO = new YandexSpellerRequestDTO(
-                testData.getOptions(),
-                testData.getText(),
-                testData.getLang(),
-                testData.getFormat()
-                );
-
-        return requestDTO;
-    }
-
-    public static YandexSpellerRequestDTO parseTestDataToYandexDTO(SpellerTextTestDataEntity testData) {
-
-        YandexSpellerRequestDTO requestDTO = new YandexSpellerRequestDTO(
-                testData.getOptions(),
-                testData.getText(),
-                testData.getLang(),
-                testData.getFormat()
-        );
+        YandexSpellerRequestDTO requestDTO = YandexSpellerRequestDTO.builder()
+                .options(testData.getOptions())
+                .text(testData.getText())
+                .lang(testData.getLang())
+                .format(testData.getFormat())
+                .build();
 
         return requestDTO;
     }
