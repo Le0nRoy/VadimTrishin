@@ -9,8 +9,8 @@ import static hw_api2.utils.Parser.jsonFileParser;
 public class DataProviders {
 
     private static String spellerTextJsonDataPath;
-    private static String spellerTextsJsonDataPath;
     private static String spellerTextJsonDataNamePattern;
+    private static String spellerTextsJsonDataPath;
     private static String spellerTextsJsonDataNamePattern;
 
     public static void setSpellerTextJsonDataPath(String spellerTextJsonDataPath) {
@@ -38,6 +38,7 @@ public class DataProviders {
 
         return jsonFileParser(SpellerTextsTestDataEntity.class, spellerTextsJsonDataPath, spellerTextsJsonDataNamePattern);
     }
+
     @DataProvider
     public Object[][] spellerTextDataProvider() {
 

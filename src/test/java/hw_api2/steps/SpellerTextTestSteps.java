@@ -21,9 +21,19 @@ public class SpellerTextTestSteps extends AbstractSteps {
         requestDTO = parseTestDataToYandexDTO(data);
     }
 
+    public void setWrongOption() {
+
+        requestDTO.setOptions(9);
+    }
+
     public void validateResponseCode() {
 
         spellerTextTestAssertions.validateCodeOfResponse(response, 0, spellerTextTestDataEntity.getExpectedCodeOfError());
+    }
+
+    public void validateFixedWord() {
+
+        spellerTextTestAssertions.validateFixedWord(response, 0, spellerTextTestDataEntity.getExpectedWord());
     }
 
 }

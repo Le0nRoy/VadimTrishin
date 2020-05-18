@@ -37,8 +37,8 @@ public class AbstractTest {
         );
 
         DataProviders.setSpellerTextJsonDataPath(testProperties.getSpellerTextJsonDataPath());
-        DataProviders.setSpellerTextsJsonDataPath(testProperties.getSpellerTextsJsonDataPath());
         DataProviders.setSpellerTextJsonDataNamePattern(testProperties.getSpellerTextJsonDataNamePattern());
+        DataProviders.setSpellerTextsJsonDataPath(testProperties.getSpellerTextsJsonDataPath());
         DataProviders.setSpellerTextsJsonDataNamePattern(testProperties.getSpellerTextsJsonDataNamePattern());
     }
 

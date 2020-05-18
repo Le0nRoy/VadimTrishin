@@ -7,9 +7,13 @@ import lombok.Getter;
 public class SpellerTextTestDataEntity extends YandexSpellerRequestDTO {
 
     int expectedCodeOfError;
+    String expectedWord;
 
-    public SpellerTextTestDataEntity(int options, String text, String lang, String format, int expectedCodeOfError) {
+    public SpellerTextTestDataEntity(int options, String text, String lang, String format,
+                                     int expectedCodeOfError, String expectedWord) {
+
         super(options, text, lang, format);
         this.expectedCodeOfError = expectedCodeOfError;
+        this.expectedWord = expectedWord;
     }
 }

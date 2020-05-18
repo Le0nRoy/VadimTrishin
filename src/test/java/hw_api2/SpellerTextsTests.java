@@ -14,9 +14,9 @@ public class SpellerTextsTests extends AbstractTest {
     }
 
     @Test(dataProvider = "spellerTextsDataProvider",
-            dataProviderClass = DataProviders.class)
+            dataProviderClass = DataProviders.class,
+            enabled = false)
     public void makeRequestAndCheckNumberOfMistakes(SpellerTextsTestDataEntity testData) {
-
 
         spellerTextsTestSteps.setRequestSpecification(requestSpecification);
         spellerTextsTestSteps.setDataAndParseItToRequest(testData);

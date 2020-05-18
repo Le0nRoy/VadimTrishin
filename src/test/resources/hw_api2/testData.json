@@ -15,16 +15,18 @@
   },
   "dataText_1": {
     "expectedCodeOfError": 0,
+    "expectedWord": null,
     "text": "Synchronization",
     "lang": "en",
     "format":  "plain",
     "options": 8
   },
   "dataText_2": {
-    "expectedCodeOfError": 3,
-    "text": "dubai",
+    "expectedCodeOfError": 1,
+    "expectedWord": "Moscow",
+    "text": "Moscw",
     "lang": "en",
     "format":  "plain",
-    "options": 8
+    "options": 0
   }
 }

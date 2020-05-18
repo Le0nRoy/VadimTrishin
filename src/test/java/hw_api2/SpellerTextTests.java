@@ -14,12 +14,37 @@ public class SpellerTextTests extends AbstractTest{
     }
 
     @Test(dataProvider = "spellerTextDataProvider",
-            dataProviderClass = DataProviders.class)
-    public void makeRequestAndCheckErrorCode(SpellerTextTestDataEntity spellerTextTestDataEntity) {
+            dataProviderClass = DataProviders.class,
+            enabled = false)
+    public void makeRequestAndCheckErrorCode(SpellerTextTestDataEntity dataEntity) {
 
         spellerTextTestSteps.setRequestSpecification(requestSpecification);
-        spellerTextTestSteps.setDataAndParseItToRequest(spellerTextTestDataEntity);
+        spellerTextTestSteps.setDataAndParseItToRequest(dataEntity);
         spellerTextTestSteps.sendRequestAndGetResponse();
         spellerTextTestSteps.validateResponseCode();
     }
+
+    @Test(dataProvider = "spellerTextDataProvider",
+            dataProviderClass = DataProviders.class,
+            enabled = false)
+    public void makeRequestndCheckFixedWord(SpellerTextTestDataEntity dataEntity) {
+
+        spellerTextTestSteps.setRequestSpecification(requestSpecification);
+        spellerTextTestSteps.setDataAndParseItToRequest(dataEntity);
+        spellerTextTestSteps.sendRequestAndGetResponse();
+        spellerTextTestSteps.validateFixedWord();
+    }
+
+    @Test(dataProvider = "spellerTextDataProvider",
+            dataProviderClass = DataProviders.class)
+//            enabled = false)
+    public void makeRequestWithWrongOptionsAndValidateIt(SpellerTextTestDataEntity dataEntity) {
+
+        spellerTextTestSteps.setRequestSpecification(requestSpecification);
+        spellerTextTestSteps.setDataAndParseItToRequest(dataEntity);
+        spellerTextTestSteps.setWrongOption();
+        spellerTextTestSteps.sendRequestAndGetResponse();
+        spellerTextTestSteps.validateResponseCode();
+    }
+
 }
