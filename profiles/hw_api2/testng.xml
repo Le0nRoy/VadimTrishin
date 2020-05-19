@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Rest Assured Homework">
+    <test name="Rest Assured Test">
+        <classes>
+            <class name="hw_api2.SpellerTextsTests" />
+            <class name="hw_api2.SpellerTextTests" />
+        </classes>
+    </test>
+</suite>
